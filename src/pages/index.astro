@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 ---
 
-<Layout title="Plasma Studios" description="Plasma Studios.">
+<Layout title="Plasma Studios" description="Plasma Studios." lockScrollUntilReady>
   <Header withIntro />
 
   <main class="relative min-h-[100dvh] px-6 pt-24">
@@ -64,6 +64,24 @@ import Header from '../components/Header.astro';
     const brandChars = document.querySelectorAll('.brand-char');
     const navTargets = document.querySelectorAll('.header-reveal');
 
+    const root = document.documentElement;
+
+    // Layout.astro bakes overflow:hidden on <html> for this page (lockScrollUntilReady)
+    // so the intro never has a race window where a scrollbar can flash before JS runs.
+    function releaseScrollLock() {
+      let stableFrames = 0;
+      function check() {
+        const settled = root.scrollHeight <= window.innerHeight;
+        stableFrames = settled ? stableFrames + 1 : 0;
+        if (stableFrames >= 3) {
+          root.style.overflow = '';
+          return;
+        }
+        requestAnimationFrame(check);
+      }
+      requestAnimationFrame(check);
+    }
+
     if (heroLogo && headerLogo) {
       if (reduceMotion) {
         heroLogo.style.display = 'none';
@@ -71,16 +89,10 @@ import Header from '../components/Header.astro';
         gsap.set(brandChars, { opacity: 1, y: 0 });
         gsap.set(navTargets, { opacity: 1, x: 0 });
         if (heroContent) gsap.set(heroContent, { opacity: 1, y: 0 });
+        root.style.overflow = '';
       } else {
         // baked in the markup already: heroLogo/heroContent hidden/offset, headerLogo/brandChars/nav hidden via style attrs
         gsap.set(brandChars, { y: 4 });
-
-        // Flip.fit briefly repositions logo-hero with position:absolute in document
-        // coordinates, which can overshoot the viewport by a few px mid-transition.
-        // Lock scroll for the duration of the intro so that never shows as a scrollbar.
-        const root = document.documentElement;
-        const previousOverflow = root.style.overflow;
-        root.style.overflow = 'hidden';
 
         const tl = gsap.timeline();
 
@@ -117,13 +129,13 @@ import Header from '../components/Header.astro';
                     ease: 'power3.out',
                   });
                 }
-                gsap.delayedCall(0.3, () => {
-                  root.style.overflow = previousOverflow;
-                });
+                releaseScrollLock();
               },
             });
           });
       }
+    } else {
+      root.style.overflow = '';
     }
   </script>
 </Layout>
