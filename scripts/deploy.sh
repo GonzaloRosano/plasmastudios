@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Deploya el build estatico de Astro al VPS de Plasma Studios.
-# Requiere el alias SSH "onasor-vps" ya configurado en ~/.ssh/config.
+# Requiere el alias SSH "plasma-vps" ya configurado en ~/.ssh/config.
 set -euo pipefail
 
-REMOTE_HOST="onasor-vps"
+REMOTE_HOST="plasma-vps"
 REMOTE_DIR="/var/www/plasmastudios"
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 

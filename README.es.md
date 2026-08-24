@@ -71,7 +71,7 @@ Un array vacío muestra un placeholder de "equipo en construcción" en vez de ca
 bash scripts/deploy.sh
 ```
 
-Compila el sitio y publica `dist/` en `/var/www/plasmastudios` en el VPS por SSH, usando el alias `onasor-vps` de `~/.ssh/config`. No hay credenciales guardadas en el repo ni en el script.
+Compila el sitio y publica `dist/` en `/var/www/plasmastudios` en el VPS por SSH, usando el alias `plasma-vps` de `~/.ssh/config`. No hay credenciales guardadas en el repo ni en el script.
 
 La configuración del servidor (nginx, ufw, TLS) se maneja directo en el VPS, no está versionada acá.
 

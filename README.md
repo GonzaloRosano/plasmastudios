@@ -71,7 +71,7 @@ An empty array renders a "team under construction" placeholder instead of broken
 bash scripts/deploy.sh
 ```
 
-Builds the site and publishes `dist/` to `/var/www/plasmastudios` on the VPS over SSH, using the `onasor-vps` alias from `~/.ssh/config`. No credentials are stored in the repo or the script.
+Builds the site and publishes `dist/` to `/var/www/plasmastudios` on the VPS over SSH, using the `plasma-vps` alias from `~/.ssh/config`. No credentials are stored in the repo or the script.
 
 Server-side (nginx, ufw, TLS) is configured directly on the VPS, not tracked here.
 
