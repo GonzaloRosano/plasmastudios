@@ -42,24 +42,28 @@
   --border: rgb(244 244 245 / 0.1);
 }
 
+html {
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  scrollbar-color: var(--accent) transparent;
-  scrollbar-width: thin;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-body::-webkit-scrollbar {
+html::-webkit-scrollbar {
   width: 10px;
 }
 
-body::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track {
   background: transparent;
 }
 
-body::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb {
   background-color: var(--accent);
   border-radius: 999px;
   border: 2px solid var(--background);
