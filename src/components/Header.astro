@@ -22,7 +22,7 @@ const isContactActive = current === normalize(contact.href);
 const linkClass = (href: string) => {
   const active = current === normalize(href);
   return [
-    'text-sm font-medium text-foreground underline-offset-4 transition-colors duration-200 hover:underline',
+    'rounded-sm px-1 py-2 text-sm font-medium text-foreground underline-offset-[6px] transition-colors duration-200 hover:underline',
     active ? 'underline' : '',
   ].join(' ');
 };
@@ -59,7 +59,7 @@ const contactClass = [
       </span>
     </a>
 
-    <nav class="flex items-center gap-6">
+    <nav class="flex items-center gap-1 sm:gap-2">
       {links.map((link) => (
         <a
           href={link.href}
@@ -70,6 +70,11 @@ const contactClass = [
           {link.label}
         </a>
       ))}
+      <span
+        class="header-reveal mx-3 h-4 w-px bg-border"
+        style={withIntro ? 'opacity:0' : undefined}
+        aria-hidden="true"
+      ></span>
       <a
         href={contact.href}
         class={`header-reveal ${contactClass}`}

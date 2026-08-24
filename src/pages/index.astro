@@ -6,27 +6,48 @@ import Header from '../components/Header.astro';
 <Layout title="Plasma Studios" description="Plasma Studios.">
   <Header withIntro />
 
-  <main class="relative flex min-h-[100dvh] items-center justify-center px-6 pt-24">
-    <svg
-      id="logo-hero"
-      class="h-40 w-auto text-foreground sm:h-48 md:h-56"
-      viewBox="0 0 122 135"
-      fill="none"
-      role="img"
-      aria-label="Plasma Studios"
-      style="opacity:0; transform: scale(0.92) translateY(12px)"
+  <main class="relative min-h-[100dvh] px-6 pt-24">
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+      <svg
+        id="logo-hero"
+        class="h-40 w-auto text-foreground sm:h-48 md:h-56"
+        viewBox="0 0 122 135"
+        fill="none"
+        role="img"
+        aria-label="Plasma Studios"
+        style="opacity:0; transform: scale(0.92) translateY(12px)"
+      >
+        <path
+          d="M 105.500 12.572 C 101.650 16.136, 91.750 24.155, 83.500 30.392 C 59.486 48.547, 39.599 67.920, 31.913 80.644 C 26.345 89.862, 21.189 100.776, 18.516 109 C 15.715 117.620, 14.266 119.849, 6.897 126.878 C 3.104 130.495, 0 133.803, 0 134.228 C 0 136.216, 4.186 134.531, 11.500 129.600 C 15.900 126.633, 24.900 121.461, 31.500 118.107 C 38.100 114.753, 45.814 110.094, 48.641 107.754 C 69.115 90.814, 80.854 78.771, 89.339 66 C 91.349 62.975, 93.339 60.050, 93.763 59.500 C 95.049 57.828, 101.915 44.930, 105.474 37.500 C 110.421 27.174, 115.681 5.896, 113.250 6.046 C 112.838 6.072, 109.350 9.008, 105.500 12.572"
+          fill="currentColor"
+          fill-rule="evenodd"
+        ></path>
+      </svg>
+    </div>
+
+    <div
+      id="hero-content"
+      class="mx-auto flex min-h-[calc(100dvh-6rem)] max-w-3xl flex-col items-center justify-center text-center"
+      style="opacity:0; transform: translateY(12px)"
     >
-      <path
-        d="M 105.500 12.572 C 101.650 16.136, 91.750 24.155, 83.500 30.392 C 59.486 48.547, 39.599 67.920, 31.913 80.644 C 26.345 89.862, 21.189 100.776, 18.516 109 C 15.715 117.620, 14.266 119.849, 6.897 126.878 C 3.104 130.495, 0 133.803, 0 134.228 C 0 136.216, 4.186 134.531, 11.500 129.600 C 15.900 126.633, 24.900 121.461, 31.500 118.107 C 38.100 114.753, 45.814 110.094, 48.641 107.754 C 69.115 90.814, 80.854 78.771, 89.339 66 C 91.349 62.975, 93.339 60.050, 93.763 59.500 C 95.049 57.828, 101.915 44.930, 105.474 37.500 C 110.421 27.174, 115.681 5.896, 113.250 6.046 C 112.838 6.072, 109.350 9.008, 105.500 12.572"
-        fill="currentColor"
-        fill-rule="evenodd"
-      ></path>
-    </svg>
+      <h1 class="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        Diseño y desarrollo para juegos y comunidades.
+      </h1>
+      <p class="mt-4 max-w-[46ch] text-base text-muted">
+        Plasma Studios combina diseño, desarrollo y comunidad para crear experiencias que la gente vuelve a usar.
+      </p>
+      <a
+        href="/nosotros"
+        class="mt-8 inline-flex h-11 items-center justify-center rounded-md border border-foreground px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-foreground hover:text-background"
+      >
+        Conocé al equipo
+      </a>
+    </div>
   </main>
 
   <noscript>
     <style>
-      #logo-hero { opacity: 1 !important; transform: none !important; }
+      #logo-hero, #hero-content { opacity: 1 !important; transform: none !important; }
     </style>
   </noscript>
 
@@ -39,6 +60,7 @@ import Header from '../components/Header.astro';
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const heroLogo = document.getElementById('logo-hero');
     const headerLogo = document.getElementById('header-logo');
+    const heroContent = document.getElementById('hero-content');
     const brandChars = document.querySelectorAll('.brand-char');
     const navTargets = document.querySelectorAll('.header-reveal');
 
@@ -48,8 +70,9 @@ import Header from '../components/Header.astro';
         gsap.set(headerLogo, { opacity: 1 });
         gsap.set(brandChars, { opacity: 1, y: 0 });
         gsap.set(navTargets, { opacity: 1, x: 0 });
+        if (heroContent) gsap.set(heroContent, { opacity: 1, y: 0 });
       } else {
-        // baked in the markup already: heroLogo hidden/offset, headerLogo/brandChars/nav hidden via style attrs
+        // baked in the markup already: heroLogo/heroContent hidden/offset, headerLogo/brandChars/nav hidden via style attrs
         gsap.set(brandChars, { y: 4 });
 
         const tl = gsap.timeline();
@@ -63,7 +86,7 @@ import Header from '../components/Header.astro';
               scale: true,
               absolute: true,
               onComplete: () => {
-                gsap.set(heroLogo, { opacity: 0 });
+                gsap.set(heroLogo, { opacity: 0, display: 'none' });
                 gsap.set(headerLogo, { opacity: 1 });
                 gsap.to(brandChars, {
                   opacity: 1,
@@ -79,6 +102,14 @@ import Header from '../components/Header.astro';
                   stagger: { each: 0.07, from: 'end' },
                   ease: 'power2.out',
                 });
+                if (heroContent) {
+                  gsap.to(heroContent, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'power3.out',
+                  });
+                }
               },
             });
           });

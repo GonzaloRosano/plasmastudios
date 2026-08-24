@@ -1,15 +1,58 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import team from '../data/team.json';
+
+// Schema esperado por cada entrada de team.json:
+// {
+//   "name": "Nombre visible",
+//   "role": "Rol o descripción corta",
+//   "discordAvatar": "/team/archivo.png",  // colocar el archivo en public/team/
+//   "minecraftNick": "nick"                // usado para renderizar la cabeza via mc-heads.net
+// }
+
+const minecraftHead = (nick: string) => `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/80`;
 ---
 
-<Layout title="Nosotros — Plasma Studios" description="Sobre Plasma Studios.">
+<Layout title="Nosotros — Plasma Studios" description="El equipo detrás de Plasma Studios.">
   <Header />
 
-  <main class="flex min-h-[100dvh] items-center justify-center px-6 pt-24">
+  <main class="flex min-h-[100dvh] flex-col items-center px-6 pb-24 pt-32">
     <div class="max-w-xl text-center">
       <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Nosotros</h1>
-      <p class="mt-4 text-base text-muted">Contenido en construcción.</p>
+      <p class="mt-4 text-base text-muted">Las personas que forman Plasma Studios.</p>
     </div>
+
+    {team.length === 0 ? (
+      <p class="mt-16 text-sm text-muted">Equipo en construcción.</p>
+    ) : (
+      <div class="mt-16 grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {team.map((member: { name: string; role: string; discordAvatar: string; minecraftNick: string }) => (
+          <div class="flex flex-col items-center gap-3 rounded-md border border-border p-6 text-center">
+            <div class="relative">
+              <img
+                src={member.discordAvatar}
+                alt={member.name}
+                width="96"
+                height="96"
+                class="h-24 w-24 rounded-full border border-border object-cover"
+              />
+              <img
+                src={minecraftHead(member.minecraftNick)}
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="absolute -bottom-1 -right-1 h-8 w-8 rounded-md border-2 border-background"
+              />
+            </div>
+            <div>
+              <p class="text-base font-semibold text-foreground">{member.name}</p>
+              <p class="text-sm text-muted">{member.role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
   </main>
 </Layout>
