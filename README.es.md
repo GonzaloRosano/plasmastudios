@@ -2,23 +2,23 @@
 
 Sitio de Plasma Studios. Hecho con [Astro](https://astro.build), Tailwind v4, GSAP y Lenis.
 
-Read this in [English](README.md).
+Léelo en [inglés](README.md).
 
-## Stack
+## Tecnologías
 
 - **Astro** (salida estática)
 - **Tailwind CSS v4** — tokens de diseño (`--background`, `--foreground`, `--muted`, `--accent`, `--border`) en `src/styles/global.css`, cambio de tema vía `data-theme` en `<html>` (respeta la preferencia del sistema por defecto, override manual persistido en `localStorage`)
-- **GSAP** (+ plugin `Flip`) — animación de intro en el home (el logo aparece centrado y se transforma en el logo del header con `Flip.fit`)
+- **GSAP** (+ plugin `Flip`) — animación de intro en el inicio (el logo aparece centrado y se transforma en el logo del header con `Flip.fit`)
 - **Lenis** — scroll suave, conectado al ticker de GSAP (`src/components/SmoothScroll.astro`)
 - **Geist Sans / Geist Mono** — self-hosted vía `@fontsource`
-- Íconos: SVGs de Phosphor inline (toggle de tema, menú mobile)
+- Íconos: SVGs de Phosphor inline (toggle de tema, menú móvil)
 
 ## Estructura
 
 ```
 src/
   components/
-    Header.astro        # nav + menú hamburguesa mobile, targets del reveal de la intro
+    Header.astro        # nav + menú hamburguesa móvil, elementos del reveal de la intro
     LogoMark.astro       # SVG del logo compartido (currentColor, se adapta al tema)
     ThemeToggle.astro     # switch de tema fijo abajo a la izquierda
     SmoothScroll.astro    # Lenis + ticker de GSAP, cargado en todas las páginas
@@ -65,7 +65,7 @@ La página `/nosotros` lee este archivo y renderiza una card por cada entrada. E
 
 Un array vacío muestra un placeholder de "equipo en construcción" en vez de cards rotas.
 
-## Deploy
+## Despliegue
 
 ```sh
 bash scripts/deploy.sh
