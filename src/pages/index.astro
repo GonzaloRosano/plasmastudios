@@ -31,48 +31,49 @@ import Header from '../components/Header.astro';
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const heroLogo = document.getElementById('logo-hero');
-    const headerSlot = document.getElementById('header-logo-slot');
-    const revealTargets = document.querySelectorAll('.header-reveal');
+    const headerLogo = document.getElementById('header-logo');
+    const brandText = document.getElementById('brand-text');
+    const navTargets = document.querySelectorAll('.header-reveal');
 
-    function moveLogoIntoHeader() {
-      if (!heroLogo || !headerSlot) return;
-      heroLogo.classList.remove('h-40', 'sm:h-48', 'md:h-56');
-      heroLogo.classList.add('h-6');
-      headerSlot.appendChild(heroLogo);
-    }
+    if (heroLogo && headerLogo) {
+      if (reduceMotion) {
+        heroLogo.style.display = 'none';
+        gsap.set(navTargets, { opacity: 1, y: 0 });
+        if (brandText) gsap.set(brandText, { opacity: 1, scaleX: 1 });
+      } else {
+        gsap.set(navTargets, { opacity: 0, y: -8 });
+        if (brandText) gsap.set(brandText, { opacity: 0, scaleX: 0 });
+        gsap.set(headerLogo, { opacity: 0 });
+        gsap.set(heroLogo, { opacity: 0, scale: 0.92, y: 12 });
 
-    if (!heroLogo || !headerSlot) {
-      // nothing to orchestrate
-    } else if (reduceMotion) {
-      moveLogoIntoHeader();
-      gsap.set(revealTargets, { opacity: 1, y: 0 });
-    } else {
-      gsap.set(revealTargets, { opacity: 0, y: -8 });
-      gsap.set(heroLogo, { opacity: 0, scale: 0.92, y: 12 });
+        const tl = gsap.timeline();
 
-      const tl = gsap.timeline();
-
-      tl.to(heroLogo, { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: 0.15 })
-        .to({}, { duration: 0.5 }) // hold
-        .add(() => {
-          const state = Flip.getState(heroLogo);
-          moveLogoIntoHeader();
-          Flip.from(state, {
-            duration: 0.9,
-            ease: 'power3.inOut',
-            absolute: true,
-            scale: true,
-            onComplete: () => {
-              gsap.to(revealTargets, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                stagger: 0.08,
-                ease: 'power3.out',
-              });
-            },
+        tl.to(heroLogo, { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: 0.15 })
+          .to({}, { duration: 0.5 }) // hold
+          .add(() => {
+            Flip.fit(heroLogo, headerLogo, {
+              duration: 0.9,
+              ease: 'power3.inOut',
+              scale: true,
+              absolute: true,
+              onComplete: () => {
+                gsap.set(heroLogo, { opacity: 0 });
+                gsap.set(headerLogo, { opacity: 1 });
+                if (brandText) {
+                  gsap.to(brandText, { opacity: 1, scaleX: 1, duration: 0.5, ease: 'power3.out' });
+                }
+                gsap.to(navTargets, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  stagger: 0.08,
+                  ease: 'power3.out',
+                  delay: 0.15,
+                });
+              },
+            });
           });
-        });
+      }
     }
   </script>
 </Layout>
