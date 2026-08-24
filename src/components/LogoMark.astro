@@ -1,15 +1,27 @@
-<?xml version="1.0" standalone="no"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- viewBox="0 0 1000 1000"
- preserveAspectRatio="xMidYMid meet">
-<style>
-  .mark { fill: #18181b; }
-  @media (prefers-color-scheme: dark) {
-    .mark { fill: #f4f4f5; }
-  }
-</style>
-<g class="mark" transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)" stroke="none">
-<path d="M5220 7765 c-152 -26 -339 -111 -509 -233 -108 -76 -286 -249 -379
+---
+interface Props {
+  id?: string;
+  class?: string;
+  style?: string;
+  ariaHidden?: boolean;
+  ariaLabel?: string;
+}
+
+const { id, class: className, style, ariaHidden = false, ariaLabel } = Astro.props;
+---
+
+<svg
+  id={id}
+  class={className}
+  viewBox="0 0 1000 1000"
+  fill="none"
+  role={ariaLabel ? 'img' : undefined}
+  aria-label={ariaLabel}
+  aria-hidden={ariaHidden ? 'true' : undefined}
+  style={style}
+>
+  <g transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
+    <path d="M5220 7765 c-152 -26 -339 -111 -509 -233 -108 -76 -286 -249 -379
 -367 -35 -44 -72 -90 -82 -102 l-18 -21 -87 25 c-623 175 -1196 114 -1474
 -156 -120 -117 -223 -296 -257 -446 -21 -94 -23 -295 -5 -420 28 -188 102
 -411 201 -609 28 -54 50 -103 50 -110 0 -6 -27 -38 -61 -71 -350 -344 -561
@@ -62,8 +74,8 @@ c30 -33 98 -114 151 -180z m-3924 -22 c122 -185 268 -368 461 -578 l111 -120
 -678 -295 -91 -1 -110 3 -180 31 -246 98 -428 306 -568 647 -25 62 -46 118
 -46 126 0 10 41 16 183 25 188 13 527 59 677 91 47 11 91 19 98 20 8 1 62 -26
 121 -59z"/>
-<path d="M4835 5724 c-498 -111 -725 -688 -437 -1111 80 -118 214 -222 349
+    <path d="M4835 5724 c-498 -111 -725 -688 -437 -1111 80 -118 214 -222 349
 -268 301 -105 634 -5 818 244 293 400 111 965 -360 1117 -103 34 -266 41 -370
 18z"/>
-</g>
+  </g>
 </svg>
