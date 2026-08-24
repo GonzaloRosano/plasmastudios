@@ -4,7 +4,7 @@ Marketing site for Plasma Studios. Built with [Astro](https://astro.build), Tail
 
 Read this in [Español](README.es.md).
 
-![Screenshot](https://raw.githubusercontent.com/GonzaloRosano/plasmastudios/master/docs/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/GonzaloRosano/plasmastudios/master/docs/screenshot.webp)
 
 ## Stack
 
