@@ -4,7 +4,7 @@ Sitio de Plasma Studios. Hecho con [Astro](https://astro.build), Tailwind v4, GS
 
 Léelo en [inglés](README.md).
 
-![Screenshot](docs/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/GonzaloRosano/plasmastudios/master/docs/screenshot.png)
 
 ## Tecnologías
 
