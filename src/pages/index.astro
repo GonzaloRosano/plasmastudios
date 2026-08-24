@@ -8,7 +8,7 @@ import Header from '../components/Header.astro';
 
   <main class="relative flex min-h-[100dvh] items-center justify-center px-6 pt-24">
     <svg
-      id="logo-card"
+      id="logo-hero"
       class="h-40 w-auto text-foreground sm:h-48 md:h-56"
       viewBox="0 0 122 135"
       fill="none"
@@ -25,20 +25,54 @@ import Header from '../components/Header.astro';
 
   <script>
     import { gsap } from 'gsap';
+    import { Flip } from 'gsap/Flip';
+
+    gsap.registerPlugin(Flip);
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const logo = document.getElementById('logo-card');
+    const heroLogo = document.getElementById('logo-hero');
+    const headerSlot = document.getElementById('header-logo-slot');
+    const revealTargets = document.querySelectorAll('.header-reveal');
 
-    if (logo) {
-      if (reduceMotion) {
-        gsap.set(logo, { opacity: 1, scale: 1, y: 0 });
-      } else {
-        gsap.fromTo(
-          logo,
-          { opacity: 0, scale: 0.92, y: 12 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: 0.15 },
-        );
-      }
+    function moveLogoIntoHeader() {
+      if (!heroLogo || !headerSlot) return;
+      heroLogo.classList.remove('h-40', 'sm:h-48', 'md:h-56');
+      heroLogo.classList.add('h-6');
+      headerSlot.appendChild(heroLogo);
+    }
+
+    if (!heroLogo || !headerSlot) {
+      // nothing to orchestrate
+    } else if (reduceMotion) {
+      moveLogoIntoHeader();
+      gsap.set(revealTargets, { opacity: 1, y: 0 });
+    } else {
+      gsap.set(revealTargets, { opacity: 0, y: -8 });
+      gsap.set(heroLogo, { opacity: 0, scale: 0.92, y: 12 });
+
+      const tl = gsap.timeline();
+
+      tl.to(heroLogo, { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'expo.out', delay: 0.15 })
+        .to({}, { duration: 0.5 }) // hold
+        .add(() => {
+          const state = Flip.getState(heroLogo);
+          moveLogoIntoHeader();
+          Flip.from(state, {
+            duration: 0.9,
+            ease: 'power3.inOut',
+            absolute: true,
+            scale: true,
+            onComplete: () => {
+              gsap.to(revealTargets, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.08,
+                ease: 'power3.out',
+              });
+            },
+          });
+        });
     }
   </script>
 </Layout>
