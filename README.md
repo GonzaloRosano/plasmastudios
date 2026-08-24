@@ -4,7 +4,7 @@ Marketing site for Plasma Studios. Built with [Astro](https://astro.build), Tail
 
 Read this in [Español](README.es.md).
 
-![Screenshot](https://api.microlink.io/?url=https%3A%2F%2Fplasmastudios.vercel.app&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=10000)
+![Screenshot](docs/screenshot.png)
 
 ## Stack
 
