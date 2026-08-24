@@ -1,43 +1,80 @@
-# Astro Starter Kit: Minimal
+# Plasma Studios
+
+Marketing site for Plasma Studios. Built with [Astro](https://astro.build), Tailwind v4, GSAP and Lenis.
+
+Read this in [Español](README.es.md).
+
+## Stack
+
+- **Astro** (static output)
+- **Tailwind CSS v4** — design tokens (`--background`, `--foreground`, `--muted`, `--accent`, `--border`) in `src/styles/global.css`, theme switching via `data-theme` on `<html>` (system preference by default, manual override persisted in `localStorage`)
+- **GSAP** (+ `Flip` plugin) — the homepage intro animation (logo grows in centered, then morphs into the header logo via `Flip.fit`)
+- **Lenis** — smooth scroll, wired through the GSAP ticker (`src/components/SmoothScroll.astro`)
+- **Geist Sans / Geist Mono** — self-hosted via `@fontsource`
+- Icons: inline Phosphor SVGs (theme toggle, mobile menu)
+
+## Structure
+
+```
+src/
+  components/
+    Header.astro       # nav + mobile hamburger menu, intro reveal targets
+    LogoMark.astro      # shared logo SVG (currentColor, adapts to theme)
+    ThemeToggle.astro    # fixed bottom-left theme switch
+    SmoothScroll.astro   # Lenis + GSAP ticker, loaded on every page
+  data/
+    team.json            # team members shown on /nosotros (see schema below)
+  layouts/
+    Layout.astro          # <html>/<head>, theme script, theme-color meta
+  pages/
+    index.astro            # home — intro animation + hero
+    nosotros.astro          # team grid
+    trabajo.astro
+    contacto.astro
+public/
+  team/                     # put team member avatar images here
+  favicon.svg, robots.txt
+scripts/
+  deploy.sh                 # build + rsync-style deploy to the VPS
+```
+
+## Development
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev        # http://localhost:4321
+npm run astro check
+npm run build
+npm run preview    # serve the production build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Team data (`src/data/team.json`)
 
-## 🚀 Project Structure
+The `/nosotros` page reads this file and renders one card per entry. Each Discord avatar file goes in `public/team/`; the Minecraft head is rendered automatically from the nick via [mc-heads.net](https://mc-heads.net).
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```json
+[
+  {
+    "name": "Display name",
+    "role": "Short role/description",
+    "discordAvatar": "/team/filename.png",
+    "minecraftNick": "nick"
+  }
+]
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+An empty array renders a "team under construction" placeholder instead of broken cards.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Deploy
 
-Any static assets, like images, can be placed in the `public/` directory.
+```sh
+bash scripts/deploy.sh
+```
 
-## 🧞 Commands
+Builds the site and publishes `dist/` to `/var/www/plasmastudios` on the VPS over SSH, using the `onasor-vps` alias from `~/.ssh/config`. No credentials are stored in the repo or the script.
 
-All commands are run from the root of the project, from a terminal:
+Server-side (nginx, ufw, TLS) is configured directly on the VPS, not tracked here.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## SEO
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`astro.config.mjs` sets `site` to the VPS IP for now — update it once the project has a real domain, then re-run `npm run build` so the sitemap (`@astrojs/sitemap`) and `robots.txt` point at the right URL.
