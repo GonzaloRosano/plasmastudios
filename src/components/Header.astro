@@ -59,13 +59,23 @@ const contactClass = [
       </span>
     </a>
 
-    <nav class="header-reveal flex items-center gap-6" style={withIntro ? 'opacity:0; transform: translateY(-8px)' : undefined}>
+    <nav class="flex items-center gap-6">
       {links.map((link) => (
-        <a href={link.href} class={linkClass(link.href)} aria-current={current === normalize(link.href) ? 'page' : undefined}>
+        <a
+          href={link.href}
+          class={`header-reveal ${linkClass(link.href)}`}
+          style={withIntro ? 'opacity:0; transform: translateX(-8px)' : undefined}
+          aria-current={current === normalize(link.href) ? 'page' : undefined}
+        >
           {link.label}
         </a>
       ))}
-      <a href={contact.href} class={contactClass} aria-current={isContactActive ? 'page' : undefined}>
+      <a
+        href={contact.href}
+        class={`header-reveal ${contactClass}`}
+        style={withIntro ? 'opacity:0; transform: translateX(-8px)' : undefined}
+        aria-current={isContactActive ? 'page' : undefined}
+      >
         {contact.label}
       </a>
     </nav>

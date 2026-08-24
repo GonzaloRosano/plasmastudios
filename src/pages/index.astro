@@ -47,7 +47,7 @@ import Header from '../components/Header.astro';
         heroLogo.style.display = 'none';
         gsap.set(headerLogo, { opacity: 1 });
         gsap.set(brandChars, { opacity: 1, y: 0 });
-        gsap.set(navTargets, { opacity: 1, y: 0 });
+        gsap.set(navTargets, { opacity: 1, x: 0 });
       } else {
         // baked in the markup already: heroLogo hidden/offset, headerLogo/brandChars/nav hidden via style attrs
         gsap.set(brandChars, { y: 4 });
@@ -74,9 +74,10 @@ import Header from '../components/Header.astro';
                 });
                 gsap.to(navTargets, {
                   opacity: 1,
-                  y: 0,
-                  duration: 0.5,
-                  ease: 'power3.out',
+                  x: 0,
+                  duration: 0.35,
+                  stagger: 0.07,
+                  ease: 'power2.out',
                   delay: brandChars.length * 0.03 + 0.15,
                 });
               },
