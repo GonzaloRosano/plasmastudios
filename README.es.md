@@ -4,6 +4,8 @@ Sitio de Plasma Studios. Hecho con [Astro](https://astro.build), Tailwind v4, GS
 
 Léelo en [inglés](README.md).
 
+![Screenshot](https://api.microlink.io/?url=https%3A%2F%2Fplasmastudios.vercel.app&screenshot=true&meta=false&embed=screenshot.url)
+
 ## Tecnologías
 
 - **Astro** (salida estática)
