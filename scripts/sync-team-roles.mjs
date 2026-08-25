@@ -1,6 +1,7 @@
 // Sincroniza el campo "tags" de team.json con los roles reales del server
-// de Discord antes de cada build. Si no hay DISCORD_BOT_TOKEN/DISCORD_GUILD_ID
-// configurados, se salta sin romper el build (útil en dev o CI sin el token).
+// de Discord antes de cada build. Nunca debe bloquear el build: si algo
+// falla (sin token, guild inválido, rate limit, lo que sea) se loguea y se
+// sigue con el team.json commiteado tal cual está.
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -44,30 +45,38 @@ async function discordGet(path) {
   return res.json();
 }
 
-const team = JSON.parse(readFileSync(TEAM_JSON_PATH, 'utf-8'));
+async function sync() {
+  const team = JSON.parse(readFileSync(TEAM_JSON_PATH, 'utf-8'));
 
-const roles = await discordGet(`/guilds/${GUILD_ID}/roles`);
-const roleById = new Map(roles.map((r) => [r.id, r.name]));
+  const roles = await discordGet(`/guilds/${GUILD_ID}/roles`);
+  const roleById = new Map(roles.map((r) => [r.id, r.name]));
 
-for (const member of team) {
-  const discordId = member.profileUrl?.split('/').pop();
-  if (!discordId) continue;
+  for (const member of team) {
+    const discordId = member.profileUrl?.split('/').pop();
+    if (!discordId) continue;
 
-  let guildMember;
-  try {
-    guildMember = await discordGet(`/guilds/${GUILD_ID}/members/${discordId}`);
-  } catch (err) {
-    console.warn(`[sync-team-roles] no se pudo leer a ${member.id} (${discordId}): ${err.message}`);
-    continue;
+    let guildMember;
+    try {
+      guildMember = await discordGet(`/guilds/${GUILD_ID}/members/${discordId}`);
+    } catch (err) {
+      console.warn(`[sync-team-roles] no se pudo leer a ${member.id} (${discordId}): ${err.message}`);
+      continue;
+    }
+
+    member.tags = guildMember.roles
+      .map((id) => clean(roleById.get(id) ?? ''))
+      .filter((name) => WHITELIST.has(name));
+
+    // Discord rate limit friendly
+    await new Promise((r) => setTimeout(r, 300));
   }
 
-  member.tags = guildMember.roles
-    .map((id) => clean(roleById.get(id) ?? ''))
-    .filter((name) => WHITELIST.has(name));
-
-  // Discord rate limit friendly
-  await new Promise((r) => setTimeout(r, 300));
+  writeFileSync(TEAM_JSON_PATH, JSON.stringify(team, null, 2) + '\n', 'utf-8');
+  console.log(`[sync-team-roles] tags actualizados para ${team.length} personas.`);
 }
 
-writeFileSync(TEAM_JSON_PATH, JSON.stringify(team, null, 2) + '\n', 'utf-8');
-console.log(`[sync-team-roles] tags actualizados para ${team.length} personas.`);
+try {
+  await sync();
+} catch (err) {
+  console.warn(`[sync-team-roles] falló la sincronización, se sigue con el team.json actual: ${err.message}`);
+}
