@@ -41,19 +41,15 @@ const { Content } = readme ? await render(readme) : { Content: null };
             class="h-20 w-20 rounded-full border border-border object-cover sm:h-24 sm:w-24 lg:h-40 lg:w-40"
           />
           {member.ceo && (
-            <svg
-              viewBox="0 0 24 24"
-              aria-label="CEO"
-              class="absolute -right-1 -top-1 h-6 w-6 fill-accent stroke-background stroke-2 sm:h-7 sm:w-7 lg:h-9 lg:w-9"
-            >
-              <path d="M12 2 L14.9 9.1 L22.5 9.8 L16.7 14.9 L18.5 22.4 L12 18.3 L5.5 22.4 L7.3 14.9 L1.5 9.8 L9.1 9.1 Z" />
-            </svg>
+            <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-background bg-accent px-2.5 py-0.5 text-xs font-semibold tracking-wide text-white">
+              CEO
+            </span>
           )}
         </div>
 
         <div class="flex min-w-0 flex-col gap-3">
           <div>
-            <h1 class="text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">{member.name}</h1>
+            <h1 class="font-display text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">{member.name}</h1>
             {member.role && <p class="mt-1 text-sm text-muted sm:text-base">{member.role}</p>}
           </div>
 
