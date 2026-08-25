@@ -10,7 +10,7 @@ const { class: className } = Astro.props;
 
 <div class={className}>
   <div id="logo-dots-mount" class="h-full w-full"></div>
-  <LogoMark id="logo-dots-source" class="hidden" ariaHidden />
+  <LogoMark id="logo-dots-source" class="hidden" style="display:none" ariaHidden />
 </div>
 
 <script>
@@ -64,9 +64,6 @@ const { class: className } = Astro.props;
   }
 
   async function init(mount: HTMLElement, source: Element) {
-    const positions = await rasterize(source, 112, 108);
-    if (positions.length === 0) return;
-
     const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     renderer.setClearColor(0x000000, 0);
     renderer.domElement.style.display = 'block';
@@ -77,6 +74,27 @@ const { class: className } = Astro.props;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 20);
     camera.position.set(0, 0, 2.15);
+
+    function fit() {
+      const w = mount.clientWidth;
+      const h = mount.clientHeight;
+      if (!w || !h) return;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+
+    const ro = new ResizeObserver(fit);
+    ro.observe(mount);
+    fit();
+    // Paint a transparent frame immediately so there's never a moment where
+    // the mount shows raw (unstyled/white) page background while the SVG
+    // rasterization below is still in flight.
+    renderer.render(scene, camera);
+
+    const positions = await rasterize(source, 112, 108);
+    if (positions.length === 0) return;
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -94,20 +112,6 @@ const { class: className } = Astro.props;
 
     const points = new THREE.Points(geometry, material);
     scene.add(points);
-
-    function fit() {
-      const w = mount.clientWidth;
-      const h = mount.clientHeight;
-      if (!w || !h) return;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-
-    const ro = new ResizeObserver(fit);
-    ro.observe(mount);
-    fit();
 
     let frame = 0;
 
