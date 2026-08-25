@@ -19,27 +19,34 @@ import team from '../data/team.json';
 
   <main class="flex min-h-[100dvh] flex-col items-center px-6 pb-24 pt-32">
     <div class="max-w-xl text-center">
-      <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Nosotros</h1>
-      <p class="mt-4 text-base text-muted">Las personas que forman Plasma Studios.</p>
+      <h1 class="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">Nosotros</h1>
+      <p class="mt-4 text-lg text-muted">Las personas que forman Plasma Studios.</p>
     </div>
 
     {team.length === 0 ? (
       <p class="mt-16 text-sm text-muted">Equipo en construcción.</p>
     ) : (
       <div class="mt-16 grid w-full max-w-6xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
-        {team.map((member: { id: string; name: string; role: string; discordAvatar: string }, i: number) => (
+        {team.map((member: { id: string; name: string; role: string; discordAvatar: string; ceo?: boolean }, i: number) => (
           <a
             href={`/nosotros/${member.id}`}
             class="team-card group flex flex-col items-center gap-3 rounded-lg p-4 text-center transition-colors duration-200 hover:bg-border/20 sm:p-6"
             style={`animation-delay: ${Math.min(i * 40, 400)}ms`}
           >
-            <img
-              src={member.discordAvatar}
-              alt={member.name}
-              width="96"
-              height="96"
-              class="h-20 w-20 rounded-full border border-border object-cover transition-all duration-200 group-hover:border-accent group-hover:shadow-[0_0_0_4px] group-hover:shadow-accent/10 sm:h-24 sm:w-24"
-            />
+            <div class="relative">
+              <img
+                src={member.discordAvatar}
+                alt={member.name}
+                width="96"
+                height="96"
+                class="h-20 w-20 rounded-full border border-border object-cover transition-all duration-200 group-hover:border-accent group-hover:shadow-[0_0_0_4px] group-hover:shadow-accent/10 sm:h-24 sm:w-24"
+              />
+              {member.ceo && (
+                <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-background bg-accent px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white">
+                  CEO
+                </span>
+              )}
+            </div>
             <div>
               <p class="text-sm font-semibold text-foreground sm:text-base">{member.name}</p>
               {member.role && <p class="text-xs text-muted sm:text-sm">{member.role}</p>}

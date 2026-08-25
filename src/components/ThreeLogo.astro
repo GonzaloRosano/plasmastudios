@@ -1,0 +1,141 @@
+---
+import LogoMark from './LogoMark.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={className}>
+  <div id="logo-dots-mount" class="h-full w-full"></div>
+  <LogoMark id="logo-dots-source" class="hidden" ariaHidden />
+</div>
+
+<script>
+  import * as THREE from 'three';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mount = document.getElementById('logo-dots-mount');
+  const source = document.getElementById('logo-dots-source');
+
+  if (mount && source) {
+    init(mount, source);
+  }
+
+  async function rasterize(svgEl: Element, cols: number, rows: number) {
+    const viewBox = svgEl.getAttribute('viewBox') ?? '0 0 100 100';
+    const markup = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">${svgEl.innerHTML}</svg>`;
+    const url = URL.createObjectURL(new Blob([markup], { type: 'image/svg+xml;charset=utf-8' }));
+
+    try {
+      const img = new Image();
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = reject;
+        img.src = url;
+      });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = cols;
+      canvas.height = rows;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return new Float32Array();
+
+      ctx.drawImage(img, 0, 0, cols, rows);
+      const data = ctx.getImageData(0, 0, cols, rows).data;
+      const aspect = rows / cols;
+      const points: number[] = [];
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const alpha = data[(row * cols + col) * 4 + 3];
+          if (alpha > 128) {
+            points.push(col / cols - 0.5, -((row / rows - 0.5) * aspect), 0);
+          }
+        }
+      }
+
+      return new Float32Array(points);
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  async function init(mount: HTMLElement, source: Element) {
+    const positions = await rasterize(source, 112, 108);
+    if (positions.length === 0) return;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    mount.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 20);
+    camera.position.set(0, 0, 2.15);
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const color = new THREE.Color('#ffffff');
+
+    const material = new THREE.PointsMaterial({
+      color,
+      size: 0.02,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.85,
+      depthWrite: false,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    function fit() {
+      const w = mount.clientWidth;
+      const h = mount.clientHeight;
+      if (!w || !h) return;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+
+    const ro = new ResizeObserver(fit);
+    ro.observe(mount);
+    fit();
+
+    let frame = 0;
+
+    if (reduceMotion) {
+      renderer.render(scene, camera);
+    } else {
+      const clock = new THREE.Clock();
+      const tick = () => {
+        const t = clock.getElapsedTime();
+        points.rotation.y = Math.sin(t * 0.35) * 0.35;
+        points.rotation.x = Math.sin(t * 0.25 + 1) * 0.08;
+        points.scale.setScalar(1 + Math.sin(t * 0.6) * 0.02);
+        renderer.render(scene, camera);
+        frame = requestAnimationFrame(tick);
+      };
+      tick();
+    }
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        cancelAnimationFrame(frame);
+        ro.disconnect();
+        geometry.dispose();
+        material.dispose();
+        renderer.dispose();
+      },
+      { once: true }
+    );
+  }
+</script>

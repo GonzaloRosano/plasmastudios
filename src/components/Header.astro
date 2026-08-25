@@ -1,11 +1,4 @@
 ---
-import LogoMark from './LogoMark.astro';
-
-interface Props {
-  withIntro?: boolean;
-}
-
-const { withIntro = false } = Astro.props;
 const NBSP = String.fromCharCode(160);
 const brandChars = 'Plasma Studios'.split('').map((ch) => (ch === String.fromCharCode(32) ? NBSP : ch));
 
@@ -37,18 +30,15 @@ const contactClass = [
 ].join(' ');
 ---
 
-<header class="fixed inset-x-0 top-0 z-30 bg-background">
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-30 border-b border-transparent bg-background/70 backdrop-blur-md transition-[border-color,background-color] duration-300"
+>
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
     <a href="/" class="flex min-w-0 items-center gap-3">
-      <LogoMark
-        id="header-logo"
-        class="h-6 w-auto shrink-0 text-foreground"
-        style={withIntro ? 'opacity:0' : undefined}
-        ariaHidden
-      />
       <span id="brand-text" class="whitespace-nowrap font-sans text-base font-semibold tracking-tight text-foreground">
         {brandChars.map((ch) => (
-          <span class="brand-char inline-block" style={withIntro ? 'opacity:0' : undefined} set:text={ch} />
+          <span class="brand-char inline-block" set:text={ch} />
         ))}
       </span>
     </a>
@@ -57,22 +47,16 @@ const contactClass = [
       {links.map((link) => (
         <a
           href={link.href}
-          class={`header-reveal ${linkClass(link.href)}`}
-          style={withIntro ? 'opacity:0; transform: translateX(-8px)' : undefined}
+          class={linkClass(link.href)}
           aria-current={current === normalize(link.href) ? 'page' : undefined}
         >
           {link.label}
         </a>
       ))}
-      <span
-        class="header-reveal mx-3 h-4 w-px bg-border"
-        style={withIntro ? 'opacity:0' : undefined}
-        aria-hidden="true"
-      ></span>
+      <span class="mx-3 h-4 w-px bg-border" aria-hidden="true"></span>
       <a
         href={contact.href}
-        class={`header-reveal ${contactClass}`}
-        style={withIntro ? 'opacity:0; transform: translateX(-8px)' : undefined}
+        class={contactClass}
         aria-current={isContactActive ? 'page' : undefined}
       >
         {contact.label}
@@ -119,13 +103,6 @@ const contactClass = [
     </nav>
   </div>
 
-  {withIntro && (
-    <noscript>
-      <style>
-        #header-logo, .brand-char, .header-reveal { opacity: 1 !important; transform: none !important; }
-      </style>
-    </noscript>
-  )}
 </header>
 
 <script>
@@ -141,4 +118,12 @@ const contactClass = [
     iconOpen?.classList.toggle('hidden', isOpen);
     iconClose?.classList.toggle('hidden', !isOpen);
   });
+
+  const siteHeader = document.getElementById('site-header');
+  function onHeaderScroll() {
+    siteHeader?.classList.toggle('border-border', window.scrollY > 8);
+    siteHeader?.classList.toggle('border-transparent', window.scrollY <= 8);
+  }
+  onHeaderScroll();
+  window.addEventListener('scroll', onHeaderScroll, { passive: true });
 </script>

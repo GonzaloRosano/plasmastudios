@@ -2,132 +2,123 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import LogoMark from '../components/LogoMark.astro';
+import ThreeLogo from '../components/ThreeLogo.astro';
+import team from '../data/team.json';
+
+type Member = { id: string; name: string; discordAvatar: string };
+const members = team as Member[];
+
+const teamPreview = members.slice(0, 9);
+const teamCount = members.length;
 ---
 
-<Layout title="Plasma Studios" description="Plasma Studios." lockScrollUntilReady>
-  <Header withIntro />
+<Layout title="Plasma Studios" description="Plasma Studios.">
+  <Header />
 
-  <main class="relative min-h-[100dvh] px-6 pt-24">
-    <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-      <LogoMark
-        id="logo-hero"
-        class="h-40 w-auto text-foreground sm:h-48 md:h-56"
-        style="opacity:0; transform: scale(0.92) translateY(12px)"
-        ariaLabel="Plasma Studios"
-      />
-    </div>
+  <main>
+    <section class="relative min-h-[100dvh] overflow-hidden px-6 pt-24">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div
+          class="absolute inset-0 opacity-[0.05]"
+          style="background-image: radial-gradient(currentColor 1px, transparent 1px); background-size: 26px 26px; color: var(--foreground); mask-image: radial-gradient(ellipse 60% 50% at 50% 40%, black, transparent);"
+        ></div>
+      </div>
 
-    <div
-      id="hero-content"
-      class="mx-auto flex min-h-[calc(100dvh-6rem)] max-w-3xl flex-col items-center justify-center text-center"
-      style="opacity:0; transform: translateY(12px)"
-    >
-      <h1 class="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-        Diseño y desarrollo para juegos y comunidades.
-      </h1>
-      <p class="mt-4 max-w-[46ch] text-base text-muted">
-        Plasma Studios combina diseño, desarrollo y comunidad para crear experiencias que la gente vuelve a usar.
-      </p>
+      <div class="relative mx-auto flex min-h-[calc(100dvh-6rem)] max-w-5xl flex-col items-center justify-center gap-6 text-center lg:max-w-6xl lg:flex-row lg:gap-16 lg:text-left">
+        <ThreeLogo class="h-36 w-36 shrink-0 sm:h-44 sm:w-44 lg:h-[26rem] lg:w-[26rem]" />
+
+        <div class="flex flex-col items-center lg:items-start">
+          <h1 class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl md:text-6xl lg:mt-0">
+            Diseño y desarrollo para todos.
+          </h1>
+          <p class="mt-4 max-w-[46ch] text-base text-muted">
+            Plasma Studios combina diseño, desarrollo y comunidad para crear experiencias únicas.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+            <a
+              href="/nosotros"
+              class="inline-flex h-11 items-center justify-center rounded-md border border-foreground px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-foreground hover:text-background"
+            >
+              Conocé al equipo
+            </a>
+            <span class="inline-flex h-11 items-center justify-center rounded-md px-6 text-sm font-medium text-muted">
+              Próximamente
+            </span>
+          </div>
+          <p class="mt-10 text-xs tracking-[0.2em] text-muted uppercase">
+            {teamCount} personas
+          </p>
+        </div>
+      </div>
+
       <a
-        href="/nosotros"
-        class="mt-8 inline-flex h-11 items-center justify-center rounded-md border border-foreground px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-foreground hover:text-background"
+        href="#equipo"
+        aria-label="Conocé al equipo"
+        class="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 text-muted transition-colors duration-200 hover:text-foreground"
       >
-        Conocé al equipo
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4v14M6 13l6 6 6-6" />
+        </svg>
       </a>
-    </div>
+    </section>
+
+    <section id="equipo" class="flex min-h-[100dvh] flex-col items-center justify-center border-t border-border px-6">
+      <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center">
+        <a href="/nosotros" class="flex -space-x-3 transition-transform duration-300 hover:-translate-y-1">
+          {teamPreview.map((member) => (
+            <img
+              src={member.discordAvatar}
+              alt={member.name}
+              width="56"
+              height="56"
+              class="h-12 w-12 rounded-full border-2 border-background object-cover sm:h-14 sm:w-14"
+            />
+          ))}
+        </a>
+
+        <div class="max-w-xl">
+          <h2 class="text-2xl font-semibold tracking-tight text-balance text-foreground sm:text-3xl">
+            {teamCount} personas forman parte de Plasma Studios.
+          </h2>
+          <p class="mt-3 text-base text-muted">
+            Cada perfil tiene su propia historia, sus roles y lo que aporta al proyecto.
+          </p>
+        </div>
+
+        <a
+          href="/nosotros"
+          class="inline-flex h-11 items-center justify-center rounded-md border border-foreground px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-foreground hover:text-background"
+        >
+          Conocé al equipo
+        </a>
+      </div>
+    </section>
+
+    <section class="border-t border-border px-6 py-20">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
+        <div class="flex items-center gap-3">
+          <LogoMark class="h-5 w-auto text-muted" ariaHidden />
+          <span class="text-sm text-muted">Plasma Studios</span>
+        </div>
+        <nav class="flex items-center gap-6 text-sm">
+          <a href="/nosotros" class="text-muted transition-colors duration-200 hover:text-foreground">Nosotros</a>
+          <a href="/trabajo" class="text-muted transition-colors duration-200 hover:text-foreground">Trabajo</a>
+          <span class="text-muted">Próximamente</span>
+        </nav>
+      </div>
+    </section>
   </main>
 
-  <noscript>
-    <style>
-      #logo-hero, #hero-content { opacity: 1 !important; transform: none !important; }
-    </style>
-  </noscript>
-
-  <script>
-    import { gsap } from 'gsap';
-    import { Flip } from 'gsap/Flip';
-
-    gsap.registerPlugin(Flip);
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const heroLogo = document.getElementById('logo-hero');
-    const headerLogo = document.getElementById('header-logo');
-    const heroContent = document.getElementById('hero-content');
-    const brandChars = document.querySelectorAll('.brand-char');
-    const navTargets = document.querySelectorAll('.header-reveal');
-
-    const root = document.documentElement;
-
-    // Layout.astro bakes overflow:hidden on <html> for this page (lockScrollUntilReady)
-    // so the intro never has a race window where a scrollbar can flash before JS runs.
-    function releaseScrollLock() {
-      let stableFrames = 0;
-      function check() {
-        const settled = root.scrollHeight <= window.innerHeight;
-        stableFrames = settled ? stableFrames + 1 : 0;
-        if (stableFrames >= 3) {
-          root.style.overflow = '';
-          return;
-        }
-        requestAnimationFrame(check);
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      .scroll-cue {
+        animation: scroll-cue-bounce 2s ease-in-out infinite;
       }
-      requestAnimationFrame(check);
     }
 
-    if (heroLogo && headerLogo) {
-      if (reduceMotion) {
-        heroLogo.style.display = 'none';
-        gsap.set(headerLogo, { opacity: 1 });
-        gsap.set(brandChars, { opacity: 1, y: 0 });
-        gsap.set(navTargets, { opacity: 1, x: 0 });
-        if (heroContent) gsap.set(heroContent, { opacity: 1, y: 0 });
-        root.style.overflow = '';
-      } else {
-        // baked in the markup already: heroLogo/heroContent hidden/offset, headerLogo/brandChars/nav hidden via style attrs
-        gsap.set(brandChars, { y: 4 });
-
-        const tl = gsap.timeline();
-
-        tl.to(heroLogo, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'expo.out', delay: 0.05 })
-          .to({}, { duration: 0.25 }) // hold
-          .add(() => {
-            Flip.fit(heroLogo, headerLogo, {
-              duration: 0.6,
-              ease: 'power3.inOut',
-              scale: true,
-              absolute: true,
-              onComplete: () => {
-                gsap.set(heroLogo, { opacity: 0, display: 'none' });
-                gsap.set(headerLogo, { opacity: 1 });
-                gsap.to(brandChars, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.25,
-                  stagger: 0.03,
-                  ease: 'power2.out',
-                });
-                gsap.to(navTargets, {
-                  opacity: 1,
-                  x: 0,
-                  duration: 0.35,
-                  stagger: { each: 0.07, from: 'end' },
-                  ease: 'power2.out',
-                });
-                if (heroContent) {
-                  gsap.to(heroContent, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    ease: 'power3.out',
-                  });
-                }
-                releaseScrollLock();
-              },
-            });
-          });
-      }
-    } else {
-      root.style.overflow = '';
+    @keyframes scroll-cue-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
     }
-  </script>
+  </style>
 </Layout>
