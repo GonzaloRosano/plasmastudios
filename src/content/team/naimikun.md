@@ -2,6 +2,6 @@
 name: "NaimiOrigins"
 ---
 
-## Hola, soy NaimiOrigins
+## Hi, I'm NaimiOrigins
 
-_Todavía sin bio. Edita este archivo (`src/content/team/naimikun.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/naimikun.md`) to tell your story._

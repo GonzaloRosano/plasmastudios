@@ -1,33 +1,33 @@
 <div align="center">
 
-# Hola, soy Gonzalo 👋
+# Hi, I'm Gonzalo 👋
 
-**Desarrollador de Software**
+**Software Developer**
 
-[![Quanam](https://img.shields.io/badge/Quanam-Desarrollador%20Frontend-ff0066?style=for-the-badge)](https://www.quanam.com)
+[![Quanam](https://img.shields.io/badge/Quanam-Frontend%20Developer-ff0066?style=for-the-badge)](https://www.quanam.com)
 
 </div>
 
 ---
 
-## Sobre mí
+## About me
 
-Desarrollador frontend con más de 3 años de aprendizaje autodidacta en tecnología, más otros 3 años de experiencia profesional, actualmente cursando Analista en Tecnologías de la Información en ORT Uruguay. Rápido para aprender, proactivo y con buena capacidad de trabajo en equipo, busco seguir creciendo en el mundo tech más allá del rol de developer. Tengo especial interés en los sistemas de diseño y en cuidar la estética de cada trabajo, combinando funcionalidad con una experiencia de usuario prolija.
+Frontend developer with 3+ years of self-taught learning plus another 3 years of professional experience, currently studying IT Analysis at ORT Uruguay. Fast learner, proactive, and a good team player — I want to keep growing in tech beyond the developer role. I have a particular interest in design systems and craft, combining functionality with a polished user experience.
 
-Desarrollador frontend en Quanam (consultora). Construyo interfaces web con React/Next.js/Astro/Angular y apps de escritorio con Tauri + Rust.
-
----
-
-## Qué hago
-
-- Frontend con **React**, **Next.js**, **Astro** y **Angular**
-- Apps de escritorio nativas con **Tauri + Rust**
-- Interfaces con **Tailwind CSS**
-- Mantenimiento de proyectos legacy en **PHP**
+Frontend developer at Quanam (consultancy). I build web interfaces with React/Next.js/Astro/Angular and desktop apps with Tauri + Rust.
 
 ---
 
-## Stack Tecnológico
+## What I do
+
+- Frontend with **React**, **Next.js**, **Astro** and **Angular**
+- Native desktop apps with **Tauri + Rust**
+- Interfaces with **Tailwind CSS**
+- Maintenance of legacy **PHP** projects
+
+---
+
+## Tech Stack
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
@@ -42,7 +42,7 @@ Desarrollador frontend en Quanam (consultora). Construyo interfaces web con Reac
 
 ---
 
-## Contacto
+## Contact
 
 - 📧 rosanogonzalo@gmail.com
 - 💻 [github.com/GonzaloRosano](https://github.com/GonzaloRosano)

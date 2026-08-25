@@ -1,25 +1,25 @@
 <div align="center">
 
-# Hola, soy Amelia 👋
+# Hi, I'm Amelia 👋
 
-**Programadora independiente & configuradora de mods/plugins**
+**Independent programmer & mod/plugin configurator**
 
 </div>
 
 ---
 
-## Sobre mí
+## About me
 
-Soy una de las que más sabe configurar mods y plugins para que todo funcione brillante — si desconozco algo, ahí me ves rompiéndome la cabeza para descubrir cómo funciona.
+I'm one of the people who best knows how to configure mods and plugins to make everything run brilliantly — if I don't know something, you'll find me racking my brain to figure out how it works.
 
-También programo en Java, aunque todavía no lo domino del todo: sigo aprendiendo. Ya fabriqué algún mod/plugin pequeño y privado, nada muy allá de lo típico (puertas custom, ores que se regeneran), pero como digo, sigo aprendiendo, practicando, equivocándome y mejorando. Mi meta en algún momento es poder construir un mod que dé vida y brillo como los mods antiguos — **Galacticraft**, **Thaumcraft** y **Witchery** son mi motivación para seguir creando.
+I also code in Java, though I haven't fully mastered it yet — I'm still learning. I've already built some small, private mods/plugins, nothing too far from the typical stuff (custom doors, regenerating ores), but as I said, I keep learning, practicing, making mistakes and improving. My goal at some point is to be able to build a mod that brings life and shine like the old mods — **Galacticraft**, **Thaumcraft** and **Witchery** are my motivation to keep creating.
 
 ---
 
-## Qué hago
+## What I do
 
-- Configuración de mods, plugins y servidores de Minecraft
-- Programación en **Java** (en desarrollo), **C++** (en desarrollo) y **Python** (en desarrollo)
+- Configuration of mods, plugins and Minecraft servers
+- Programming in **Java** (in progress), **C++** (in progress) and **Python** (in progress)
 
 ---
 
@@ -32,9 +32,9 @@ También programo en Java, aunque todavía no lo domino del todo: sigo aprendien
 
 ---
 
-## Contacto
+## Contact
 
-_Preferiblemente por Discord si querés solicitar mis servicios — respondo antes._
+_Preferably on Discord if you want to request my services — I answer faster there._
 
 - 📧 ameliagata99@gmail.com
 - 💬 Discord: ameliatn

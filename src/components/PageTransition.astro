@@ -1,0 +1,60 @@
+---
+---
+
+<script>
+  import { gsap } from 'gsap';
+
+  const TARGET_SELECTOR = '.vt-text, .markdown-body > *';
+  const DURATION = 0.4;
+  const STAGGER = 0.04;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll(TARGET_SELECTOR);
+
+  if (reduceMotion || targets.length === 0) {
+    gsap.set(targets, { opacity: 1, filter: 'blur(0px)' });
+  } else {
+    gsap.fromTo(
+      targets,
+      { opacity: 0, filter: 'blur(8px)' },
+      { opacity: 1, filter: 'blur(0px)', duration: DURATION, stagger: STAGGER, ease: 'power2.out' }
+    );
+  }
+
+  if (!reduceMotion) {
+    document.addEventListener('click', (e) => {
+      const link = (e.target as HTMLElement)?.closest('a');
+      if (!link) return;
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (link.target === '_blank' || link.hasAttribute('download')) return;
+
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+      let url: URL;
+      try {
+        url = new URL(href, window.location.href);
+      } catch {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname && url.hash) return;
+
+      e.preventDefault();
+      const out = document.querySelectorAll(TARGET_SELECTOR);
+      if (out.length === 0) {
+        window.location.href = link.href;
+        return;
+      }
+      gsap.to(out, {
+        opacity: 0,
+        filter: 'blur(8px)',
+        duration: DURATION,
+        ease: 'power2.in',
+        onComplete: () => {
+          window.location.href = link.href;
+        },
+      });
+    });
+  }
+</script>

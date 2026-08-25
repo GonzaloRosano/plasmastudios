@@ -2,6 +2,6 @@
 name: "Terrakota"
 ---
 
-## Hola, soy Terrakota
+## Hi, I'm Terrakota
 
-_Todavía sin bio. Edita este archivo (`src/content/team/terrakota.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/terrakota.md`) to tell your story._

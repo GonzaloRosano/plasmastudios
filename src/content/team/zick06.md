@@ -2,6 +2,6 @@
 name: "Zick06"
 ---
 
-## Hola, soy Zick06
+## Hi, I'm Zick06
 
-_Todavía sin bio. Edita este archivo (`src/content/team/zick06.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/zick06.md`) to tell your story._

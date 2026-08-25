@@ -8,6 +8,12 @@
 @import "@fontsource/space-grotesk/700.css";
 @import "github-markdown-css/github-markdown-light.css";
 
+/* .vt-text marca títulos/subtítulos/CTAs que la transición de página
+   (GSAP, ver PageTransition.astro) anima con fade + blur al navegar. */
+.vt-text {
+  will-change: opacity, filter;
+}
+
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {

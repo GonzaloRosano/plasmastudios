@@ -2,6 +2,6 @@
 name: "GatoPlay"
 ---
 
-## Hola, soy GatoPlay
+## Hi, I'm GatoPlay
 
-_Todavía sin bio. Edita este archivo (`src/content/team/gatoplay.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/gatoplay.md`) to tell your story._

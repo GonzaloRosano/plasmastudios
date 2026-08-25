@@ -2,6 +2,6 @@
 name: "Serenity Kent"
 ---
 
-## Hola, soy Serenity Kent
+## Hi, I'm Serenity Kent
 
-_Todavía sin bio. Edita este archivo (`src/content/team/serenitykent.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/serenitykent.md`) to tell your story._

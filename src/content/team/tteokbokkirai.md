@@ -2,6 +2,6 @@
 name: "Bibi"
 ---
 
-## Hola, soy Bibi
+## Hi, I'm Bibi
 
-_Todavía sin bio. Edita este archivo (`src/content/team/tteokbokkirai.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/tteokbokkirai.md`) to tell your story._

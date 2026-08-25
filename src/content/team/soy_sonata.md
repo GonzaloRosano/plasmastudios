@@ -1,38 +1,38 @@
 <div align="center">
 
-# Hola, soy Sonata 🦋
+# Hi, I'm Sonata 🦋
 
-**Artista — LoreMaker, Render Artist & Pixel Art**
+**Artist — LoreMaker, Render Artist & Pixel Art**
 
 </div>
 
 ---
 
-## Sobre mí
+## About me
 
-¡Hola! Tengo 18 años, soy artista y amo las polillas. Espero que la pases bien en mi perfil.
+Hi! I'm 18 years old, an artist, and I love moths. I hope you have a great time on my profile.
 
 ---
 
-## Qué hago
+## What I do
 
-- Lore y worldbuilding (**LoreMaker**)
-- Renders y arte digital (**Render Artist**)
+- Lore and worldbuilding (**LoreMaker**)
+- Renders and digital art (**Render Artist**)
 - Pixel art
-- Construcción (**Builder**)
-- Edición de imágenes
+- Building (**Builder**)
+- Image editing
 
 ---
 
-## Ahora mismo
+## Right now
 
-- 🎮 Jugando *Honkai: Star Rail*
-- 📖 Leyendo *Witch Hat Atelier*
-- 🎨 Dibujando algunos redesigns
-- 🎵 Escuchando *Morality Lesson* de Will Stetson
+- 🎮 Playing *Honkai: Star Rail*
+- 📖 Reading *Witch Hat Atelier*
+- 🎨 Drawing some redesigns
+- 🎵 Listening to *Morality Lesson* by Will Stetson
 
 ---
 
-## Contacto
+## Contact
 
 - 💬 Discord: Soy_Sonata

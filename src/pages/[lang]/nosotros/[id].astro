@@ -1,20 +1,27 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import team from '../../data/team.json';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import team from '../../../data/team.json';
+import { LOCALES, t, localePath, tagLabel, type Locale } from '../../../i18n/ui';
 
 export async function getStaticPaths() {
   const readmes = await getCollection('team');
 
-  return team.map((member: { id: string }) => {
-    const readme = readmes.find((entry) => entry.id === member.id);
-    return {
-      params: { id: member.id },
-      props: { member, readme },
-    };
-  });
+  return LOCALES.flatMap((lang) =>
+    team.map((member: { id: string }) => {
+      const entryId = lang === 'es' ? `${member.id}es` : member.id;
+      const readme = readmes.find((entry) => entry.id === entryId);
+      return {
+        params: { lang, id: member.id },
+        props: { member, readme },
+      };
+    })
+  );
 }
+
+const { lang } = Astro.params as { lang: Locale };
+const strings = t(lang);
 
 const { member, readme } = Astro.props as {
   member: { id: string; name: string; role: string; discordAvatar: string; profileUrl: string; tags?: string[]; ceo?: boolean };
@@ -22,13 +29,16 @@ const { member, readme } = Astro.props as {
 };
 
 const { Content } = readme ? await render(readme) : { Content: null };
+
+const markdownClass =
+  'markdown-body mx-auto max-w-none bg-transparent! [&_p:has(img)]:flex [&_p:has(img)]:flex-wrap [&_p:has(img)]:items-center [&_p:has(img)]:justify-center [&_p:has(img)]:gap-2 [&_img]:m-0! [&_img]:inline-block';
 ---
 
-<Layout title={`${member.name} — Plasma Studios`} description={`Perfil de ${member.name} en Plasma Studios.`}>
+<Layout title={`${member.name} — Plasma Studios`} description={strings.profile.description(member.name)} lang={lang}>
   <Header />
 
   <main class="mx-auto flex w-full max-w-5xl flex-col px-6 py-16 pt-32">
-    <a href="/nosotros" class="text-sm text-muted transition-colors hover:text-foreground">← Volver</a>
+    <a href={localePath(lang, 'nosotros')} class="vt-text text-sm text-muted transition-colors hover:text-foreground">{strings.profile.back}</a>
 
     <div class="mt-8 flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-10">
       <div class="flex flex-row items-center gap-4 lg:sticky lg:top-16 lg:w-72 lg:shrink-0 lg:flex-col lg:items-start">
@@ -49,14 +59,14 @@ const { Content } = readme ? await render(readme) : { Content: null };
 
         <div class="flex min-w-0 flex-col gap-3">
           <div>
-            <h1 class="font-display text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">{member.name}</h1>
-            {member.role && <p class="mt-1 text-sm text-muted sm:text-base">{member.role}</p>}
+            <h1 class="vt-text font-display text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">{member.name}</h1>
+            {member.role && <p class="vt-text mt-1 text-sm text-muted sm:text-base">{member.role}</p>}
           </div>
 
           {member.tags && member.tags.length > 0 && (
-            <div class="mt-1 flex flex-wrap gap-1.5">
+            <div class="vt-text mt-1 flex flex-wrap gap-1.5">
               {member.tags.map((tag) => (
-                <span class="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted">{tag}</span>
+                <span class="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted">{tagLabel(lang, tag)}</span>
               ))}
             </div>
           )}
@@ -65,7 +75,7 @@ const { Content } = readme ? await render(readme) : { Content: null };
 
       <div class="flex min-w-0 flex-1 flex-col border-t border-border pt-10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
         {Content && (
-          <div class="markdown-body mx-auto max-w-none bg-transparent! [&_p:has(img)]:flex [&_p:has(img)]:flex-wrap [&_p:has(img)]:items-center [&_p:has(img)]:justify-center [&_p:has(img)]:gap-2 [&_img]:m-0! [&_img]:inline-block">
+          <div class={markdownClass}>
             <Content />
           </div>
         )}

@@ -1,22 +1,29 @@
 ---
 import LogoMark from './LogoMark.astro';
+import { LOCALES, t, otherLocale, localePath, type Locale } from '../i18n/ui';
 
 const normalize = (path: string) => path.replace(/\/$/, '') || '/';
-const current = normalize(Astro.url.pathname);
+const pathname = normalize(Astro.url.pathname);
+const segments = pathname.split('/').filter(Boolean);
+const locale: Locale = (LOCALES as readonly string[]).includes(segments[0]) ? (segments[0] as Locale) : 'es';
+const rest = '/' + segments.slice(1).join('/');
+const otherLangHref = localePath(otherLocale(locale), rest === '/' ? '' : rest);
+
+const strings = t(locale);
 
 const links = [
-  { href: '/', label: 'Inicio' },
-  { href: '/nosotros', label: 'Nosotros' },
-  { href: '/trabajo', label: 'Trabajo' },
+  { href: localePath(locale, ''), label: strings.nav.home },
+  { href: localePath(locale, 'nosotros'), label: strings.nav.about },
+  { href: localePath(locale, 'trabajo'), label: strings.nav.work },
 ];
 
-const contact = { href: '/contacto', label: 'Contacto' };
-const isContactActive = current === normalize(contact.href);
+const contact = { href: localePath(locale, 'contacto'), label: strings.nav.contact };
+const isContactActive = pathname === normalize(contact.href);
 
 const linkClass = (href: string) => {
-  const active = current === normalize(href);
+  const active = pathname === normalize(href);
   return [
-    'rounded-full px-3 py-1.5 text-sm font-medium underline-offset-4 transition-colors duration-200',
+    'min-w-[84px] rounded-full px-3 py-1.5 text-center text-sm font-medium underline-offset-4 transition-colors duration-200',
     active ? 'text-foreground underline' : 'text-foreground hover:bg-border/40',
   ].join(' ');
 };
@@ -24,27 +31,40 @@ const linkClass = (href: string) => {
 
 <header id="site-header" class="fixed inset-x-0 top-4 z-30 px-4 transition-transform duration-300">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-1 rounded-full border border-border bg-background/80 py-1.5 pl-4 pr-1.5 shadow-lg backdrop-blur-md">
-    <a href="/" class="font-display mr-5 flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-semibold tracking-tight text-foreground">
+    <a href={localePath(locale, '')} class="font-display flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-semibold tracking-tight text-foreground">
       <LogoMark class="h-6 w-auto shrink-0 text-foreground" ariaHidden />
       Plasma Studios
     </a>
 
-    <nav class="hidden items-center gap-1 md:flex">
+    <nav class="hidden flex-1 items-center justify-center gap-1 md:flex">
       {links.map((link) => (
-        <a href={link.href} class={linkClass(link.href)} aria-current={current === normalize(link.href) ? 'page' : undefined}>
+        <a href={link.href} class={linkClass(link.href)} aria-current={pathname === normalize(link.href) ? 'page' : undefined}>
           {link.label}
         </a>
       ))}
+    </nav>
+
+    <div class="hidden shrink-0 items-center gap-3 md:flex">
+      <div class="flex items-center gap-1.5 text-xs font-semibold">
+        <a href={locale === 'es' ? pathname : otherLangHref} aria-current={locale === 'es' ? 'true' : undefined} class={locale === 'es' ? 'text-accent underline underline-offset-4' : 'text-muted underline-offset-4 transition-colors duration-200 hover:text-foreground'}>
+          ES
+        </a>
+        <span class="text-border">|</span>
+        <a href={locale === 'en' ? pathname : otherLangHref} aria-current={locale === 'en' ? 'true' : undefined} class={locale === 'en' ? 'text-accent underline underline-offset-4' : 'text-muted underline-offset-4 transition-colors duration-200 hover:text-foreground'}>
+          EN
+        </a>
+      </div>
+
       <a
         href={contact.href}
-        class={`ml-1 inline-flex h-8 items-center justify-center rounded-full px-4 text-sm font-medium transition-colors duration-200 ${
+        class={`inline-flex h-8 min-w-[92px] items-center justify-center rounded-full px-4 text-sm font-medium transition-colors duration-200 ${
           isContactActive ? 'bg-accent text-white' : 'bg-foreground text-background hover:opacity-90'
         }`}
         aria-current={isContactActive ? 'page' : undefined}
       >
         {contact.label}
       </a>
-    </nav>
+    </div>
 
     <button
       id="mobile-menu-toggle"
@@ -70,8 +90,8 @@ const linkClass = (href: string) => {
       {links.map((link) => (
         <a
           href={link.href}
-          class={`rounded-full px-3 py-2.5 text-base font-medium underline-offset-4 ${current === normalize(link.href) ? 'text-foreground underline' : 'text-foreground'}`}
-          aria-current={current === normalize(link.href) ? 'page' : undefined}
+          class={`rounded-full px-3 py-2.5 text-base font-medium underline-offset-4 ${pathname === normalize(link.href) ? 'text-foreground underline' : 'text-foreground'}`}
+          aria-current={pathname === normalize(link.href) ? 'page' : undefined}
         >
           {link.label}
         </a>
@@ -83,6 +103,11 @@ const linkClass = (href: string) => {
       >
         {contact.label}
       </a>
+      <div class="mt-2 flex items-center justify-center gap-3 text-sm font-semibold">
+        <a href={locale === 'es' ? pathname : otherLangHref} class={locale === 'es' ? 'text-accent underline underline-offset-4' : 'text-muted underline-offset-4'}>ES</a>
+        <span class="text-border">|</span>
+        <a href={locale === 'en' ? pathname : otherLangHref} class={locale === 'en' ? 'text-accent underline underline-offset-4' : 'text-muted underline-offset-4'}>EN</a>
+      </div>
     </nav>
   </div>
 </header>

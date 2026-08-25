@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { LOCALES, t, type Locale } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const strings = t(lang);
+---
+
+<Layout title={`${strings.contacto.title} — Plasma Studios`} description={strings.contacto.description} lang={lang}>
+  <Header />
+
+  <main class="flex min-h-[100dvh] flex-col items-center px-6 pb-24 pt-32">
+    <div class="max-w-xl text-center">
+      <h1 class="vt-text font-display text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">{strings.contacto.title}</h1>
+      <p class="vt-text mt-4 text-lg text-muted">{strings.contacto.subtitle}</p>
+      <span class="vt-text mt-8 inline-flex h-11 items-center justify-center rounded-md border border-border px-6 text-sm font-medium text-muted">
+        {strings.contacto.comingSoon}
+      </span>
+    </div>
+  </main>
+</Layout>

@@ -2,6 +2,6 @@
 name: "Salmonsabroso"
 ---
 
-## Hola, soy Salmonsabroso
+## Hi, I'm Salmonsabroso
 
-_Todavía sin bio. Edita este archivo (`src/content/team/salmonsabroso.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/salmonsabroso.md`) to tell your story._

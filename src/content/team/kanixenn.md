@@ -1,30 +1,30 @@
 <div align="center">
 
-# ¡Hey! Mi nombre es Kanixenn ✨
+# Hey! My name is Kanixenn ✨
 
-**Animador, Guionista, LoreMaker y Editor de Video**
+**Animator, Screenwriter, LoreMaker and Video Editor**
 
 </div>
 
 ---
 
-## Sobre mí
+## About me
 
-Argentino, 25 años. Desde 2017 empecé en la animación en Minecraft. Me dediqué al teatro desde que tengo memoria hasta los 15 años, pasé a ser actor de doblaje y participar en pequeños cortometrajes y dirigir otras obras de ese mismo mundillo. Mantuve como hobby ser editor de video y guionista, aprendiendo tanto de forma independiente como en algunos cursos. Hace 3 años aprendí a dibujar y poco a poco voy creciendo como artista.
+Argentinian, 25 years old. I started animating in Minecraft back in 2017. I was into theater for as long as I can remember, up until I was 15, then became a voice actor and took part in short films and directed other productions in that same world. I kept video editing and screenwriting as a hobby, learning both on my own and through some courses. Three years ago I learned to draw and I keep growing as an artist little by little.
 
 ---
 
-## Qué hago
+## What I do
 
-- Guiones
+- Scripts
 - Storyboards
-- Ideas para el lore
-- Animación
-- Edición de video
+- Lore ideas
+- Animation
+- Video editing
 
 ---
 
-## Contacto
+## Contact
 
 - ✉️ MarkusOnline4815@gmail.com
 - 💬 Discord: Kanixenn

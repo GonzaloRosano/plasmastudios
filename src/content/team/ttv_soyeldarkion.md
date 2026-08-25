@@ -1,25 +1,25 @@
 <div align="center">
 
-# Hola, soy Darkion 👋
+# Hi, I'm Darkion 👋
 
-**Compositor de FL Studio y editor de audio**
+**FL Studio composer and audio editor**
 
 </div>
 
 ---
 
-## Sobre mí
+## About me
 
-Antes de ser compositor era jugador de juegos de ritmo (aún lo soy), tocaba la batería (hasta que me lesioné) y desde siempre me ha gustado la música, descubriendo que tengo algo llamado *perfect pitch*. Desde ese momento intenté explotar el potencial de mis oídos hasta que, bueno, aquí me hallo.
+Before being a composer I was a rhythm game player (still am), I played drums (until I got injured), and I've always loved music, eventually discovering I have something called *perfect pitch*. Since then I tried to make the most of my ears until, well, here I am.
 
-Compositor desde hace 4 años, cuando empecé a tocar botones y ver qué cosas pasaban.
+Composer for 4 years now, since I started pressing buttons and seeing what happened.
 
 ---
 
-## Qué hago
+## What I do
 
-- Música y sonidos de ambiente
-- Me especializo en música de *boss fight*, covers y estilo Friday Night Funkin, pero puedo intentar adaptarme a lo que sea
+- Music and ambient sound
+- I specialize in boss fight music, covers and Friday Night Funkin style, but I can try to adapt to anything
 
 ---
 
@@ -29,7 +29,7 @@ Compositor desde hace 4 años, cuando empecé a tocar botones y ver qué cosas p
 
 ---
 
-## Contacto
+## Contact
 
 - 📧 Raultronix24@gmail.com
 - 💬 Discord: TTV_Soyeldarkion

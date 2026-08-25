@@ -2,6 +2,6 @@
 name: "⤷ ⋆.˚ Luzz 🤍!! ˎˊ˗"
 ---
 
-## Hola, soy ⤷ ⋆.˚ Luzz 🤍!! ˎˊ˗
+## Hi, I'm ⤷ ⋆.˚ Luzz 🤍!! ˎˊ˗
 
-_Todavía sin bio. Edita este archivo (`src/content/team/luu0ndisc.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/luu0ndisc.md`) to tell your story._

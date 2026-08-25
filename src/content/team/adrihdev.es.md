@@ -1,24 +1,24 @@
 <div align="center">
 
-# Hi, I'm Adrián 👋
+# Hola, soy Adrián 👋
 
-**Frontend Web Developer**
+**Desarrollador Web Frontend**
 
 </div>
 
 ---
 
-## About me
+## Sobre mí
 
-Besides web development, I'm a drummer and passionate about chess. I started programming as a hobby and turned it into my profession.
+Además de dedicarme al desarrollo web, soy baterista y apasionado del ajedrez. Empecé programando como hobby y lo convertí en mi profesión.
 
-I've built websites, platforms and admin panels, always focused on performance, user experience and quality details.
+He creado páginas web, plataformas y paneles administrativos, siempre enfocado en rendimiento, experiencia de usuario y detalles de calidad.
 
-I collaborate with **Luxeria Studio** on the frontend development of Minecraft projects, including *The Spain Games 5* — the biggest challenge I've taken on so far.
+Colaboro con **Luxeria Studio** en el desarrollo frontend de proyectos de Minecraft, incluyendo *The Spain Games 5* — el mayor reto en el que participé hasta la fecha.
 
 ---
 
-## Tech Stack
+## Stack Tecnológico
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -31,7 +31,7 @@ I collaborate with **Luxeria Studio** on the frontend development of Minecraft p
 
 ---
 
-## Contact
+## Contacto
 
 - 📧 adrihdev@proton.me
 - 💻 [github.com/adrihdev](https://github.com/adrihdev)

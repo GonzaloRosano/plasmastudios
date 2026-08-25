@@ -2,6 +2,6 @@
 name: "Metta"
 ---
 
-## Hola, soy Metta
+## Hi, I'm Metta
 
-_Todavía sin bio. Edita este archivo (`src/content/team/mettagatita.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/mettagatita.md`) to tell your story._

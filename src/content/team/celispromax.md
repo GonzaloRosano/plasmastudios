@@ -2,6 +2,6 @@
 name: "Celisito"
 ---
 
-## Hola, soy Celisito
+## Hi, I'm Celisito
 
-_Todavía sin bio. Edita este archivo (`src/content/team/celispromax.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/celispromax.md`) to tell your story._

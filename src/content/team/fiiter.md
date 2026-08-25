@@ -2,6 +2,6 @@
 name: "Edgar"
 ---
 
-## Hola, soy Edgar
+## Hi, I'm Edgar
 
-_Todavía sin bio. Edita este archivo (`src/content/team/fiiter.md`) para contar tu historia._
+_No bio yet. Edit this file (`src/content/team/fiiter.md`) to tell your story._
