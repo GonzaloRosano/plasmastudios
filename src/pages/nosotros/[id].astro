@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import team from '../../data/team.json';
+
+export async function getStaticPaths() {
+  const readmes = await getCollection('team');
+
+  return team.map((member: { id: string }) => {
+    const readme = readmes.find((entry) => entry.id === member.id);
+    return {
+      params: { id: member.id },
+      props: { member, readme },
+    };
+  });
+}
+
+const { member, readme } = Astro.props as {
+  member: { id: string; name: string; role: string; discordAvatar: string; profileUrl: string; tags?: string[] };
+  readme: Awaited<ReturnType<typeof getCollection>>[number] | undefined;
+};
+
+const { Content } = readme ? await render(readme) : { Content: null };
+---
+
+<Layout title={`${member.name} — Plasma Studios`} description={`Perfil de ${member.name} en Plasma Studios.`}>
+  <Header />
+
+  <main class="mx-auto flex w-full max-w-5xl flex-col px-6 py-16 pt-32">
+    <a href="/nosotros" class="text-sm text-muted transition-colors hover:text-foreground">← Volver</a>
+
+    <div class="mt-8 flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-10">
+      <div class="flex flex-col items-start gap-4 lg:sticky lg:top-16 lg:w-72 lg:shrink-0">
+        <img
+          src={member.discordAvatar}
+          alt={member.name}
+          width="160"
+          height="160"
+          class="h-32 w-32 rounded-full border border-border object-cover sm:h-40 sm:w-40"
+        />
+
+        <div>
+          <h1 class="text-2xl font-semibold tracking-tight sm:text-3xl">{member.name}</h1>
+          {member.role && <p class="mt-1 text-base text-muted">{member.role}</p>}
+        </div>
+
+        {member.tags && member.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {member.tags.map((tag) => (
+              <span class="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="flex min-w-0 flex-1 flex-col border-t border-border pt-10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
+        {Content && (
+          <div class="markdown-body mx-auto max-w-none bg-transparent! [&_p:has(img)]:flex [&_p:has(img)]:flex-wrap [&_p:has(img)]:items-center [&_p:has(img)]:justify-center [&_p:has(img)]:gap-2 [&_img]:m-0! [&_img]:inline-block">
+            <Content />
+          </div>
+        )}
+      </div>
+    </div>
+  </main>
+</Layout>

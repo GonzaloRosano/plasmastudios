@@ -1,1 +1,255 @@
-[]
+[
+  {
+    "name": "Onasor",
+    "role": "",
+    "discordAvatar": "/team/onasor0.png",
+    "profileUrl": "https://discord.com/users/746418572301172747",
+    "id": "onasor0",
+    "tags": [
+      "Web Developer",
+      "Render Artist",
+      "DC Builder",
+      "Mod developer",
+      "Builder",
+      "Configurador",
+      "Overlay Developer"
+    ]
+  },
+  {
+    "name": "adrih",
+    "role": "",
+    "discordAvatar": "/team/adrihdev.png",
+    "profileUrl": "https://discord.com/users/346605720952766474",
+    "id": "adrihdev",
+    "tags": []
+  },
+  {
+    "name": "Bibi",
+    "role": "",
+    "discordAvatar": "/team/tteokbokkirai.png",
+    "profileUrl": "https://discord.com/users/645653577653551104",
+    "id": "tteokbokkirai",
+    "tags": []
+  },
+  {
+    "name": "Darkion",
+    "role": "",
+    "discordAvatar": "/team/ttv_soyeldarkion.png",
+    "profileUrl": "https://discord.com/users/952018731339489300",
+    "id": "ttv_soyeldarkion",
+    "tags": [
+      "Musico"
+    ]
+  },
+  {
+    "name": "Edgar",
+    "role": "",
+    "discordAvatar": "/team/fiiter.png",
+    "profileUrl": "https://discord.com/users/538430996639645716",
+    "id": "fiiter",
+    "tags": [
+      "Builder",
+      "LoreMaker"
+    ]
+  },
+  {
+    "name": "GatoPlay",
+    "role": "",
+    "discordAvatar": "/team/gatoplay.png",
+    "profileUrl": "https://discord.com/users/674166119468367922",
+    "id": "gatoplay",
+    "tags": [
+      "Artista PixelArt",
+      "Builder"
+    ]
+  },
+  {
+    "name": "Kanixenn~",
+    "role": "",
+    "discordAvatar": "/team/kanixenn.png",
+    "profileUrl": "https://discord.com/users/909115555976478802",
+    "id": "kanixenn",
+    "tags": [
+      "Animador",
+      "Editor de video",
+      "LoreMaker"
+    ]
+  },
+  {
+    "name": "Metta",
+    "role": "",
+    "discordAvatar": "/team/mettagatita.png",
+    "profileUrl": "https://discord.com/users/900028203761033297",
+    "id": "mettagatita",
+    "tags": [
+      "Render Artist",
+      "Animador",
+      "Editor de imagenes"
+    ]
+  },
+  {
+    "name": "Salmonsabroso",
+    "role": "",
+    "discordAvatar": "/team/salmonsabroso.png",
+    "profileUrl": "https://discord.com/users/988451889123328010",
+    "id": "salmonsabroso",
+    "tags": [
+      "LoreMaker",
+      "Modelador Blockbench"
+    ]
+  },
+  {
+    "name": "Sonata♪",
+    "role": "",
+    "discordAvatar": "/team/soy_sonata.png",
+    "profileUrl": "https://discord.com/users/1509515323441680435",
+    "id": "soy_sonata",
+    "tags": [
+      "LoreMaker",
+      "Render Artist",
+      "Artista PixelArt",
+      "Builder",
+      "Editor de imagenes"
+    ]
+  },
+  {
+    "name": "Zick06",
+    "role": "",
+    "discordAvatar": "/team/zick06.png",
+    "profileUrl": "https://discord.com/users/897944407830065183",
+    "id": "zick06",
+    "tags": [
+      "LoreMaker",
+      "DC Builder",
+      "Builder",
+      "Editor de video"
+    ]
+  },
+  {
+    "name": "! ꒰ᐢ. .ᐢ꒱₊ 𝑲𝒆𝒊𝒕𝒉 🌱˚⊹",
+    "role": "",
+    "discordAvatar": "/team/sleepykeith.png",
+    "profileUrl": "https://discord.com/users/587765819082276896",
+    "id": "sleepykeith",
+    "tags": [
+      "DC Builder",
+      "Builder"
+    ]
+  },
+  {
+    "name": "ameliaTN",
+    "role": "",
+    "discordAvatar": "/team/ameliatn.png",
+    "profileUrl": "https://discord.com/users/945469023963992175",
+    "id": "ameliatn",
+    "tags": [
+      "Configurador ConditionalEvents",
+      "Configurador Mythic"
+    ]
+  },
+  {
+    "name": "Berry (Comisiones de emergencia)",
+    "role": "",
+    "discordAvatar": "/team/nightberryrod.png",
+    "profileUrl": "https://discord.com/users/515677314130903084",
+    "id": "nightberryrod",
+    "tags": [
+      "LoreMaker",
+      "Render Artist",
+      "Artista PixelArt",
+      "Animador",
+      "Builder",
+      "Overlay Developer"
+    ]
+  },
+  {
+    "name": "Box",
+    "role": "",
+    "discordAvatar": "/team/fatboxalt.png",
+    "profileUrl": "https://discord.com/users/1288048376440684576",
+    "id": "fatboxalt",
+    "tags": [
+      "Animador",
+      "Artista 3D"
+    ]
+  },
+  {
+    "name": "Celisito",
+    "role": "",
+    "discordAvatar": "/team/celispromax.png",
+    "profileUrl": "https://discord.com/users/1187098984649601075",
+    "id": "celispromax",
+    "tags": [
+      "Configurador ConditionalEvents",
+      "Configurador Mythic"
+    ]
+  },
+  {
+    "name": "Nacho_5234",
+    "role": "",
+    "discordAvatar": "/team/nacho_5234.png",
+    "profileUrl": "https://discord.com/users/294627213008044043",
+    "id": "nacho_5234",
+    "tags": [
+      "Builder"
+    ]
+  },
+  {
+    "name": "NaimiOrigins",
+    "role": "",
+    "discordAvatar": "/team/naimikun.png",
+    "profileUrl": "https://discord.com/users/477629075746324493",
+    "id": "naimikun",
+    "tags": []
+  },
+  {
+    "name": "Serenity Kent",
+    "role": "",
+    "discordAvatar": "/team/serenitykent.png",
+    "profileUrl": "https://discord.com/users/434776466778095616",
+    "id": "serenitykent",
+    "tags": []
+  },
+  {
+    "name": "Terrakota",
+    "role": "",
+    "discordAvatar": "/team/terrakota.png",
+    "profileUrl": "https://discord.com/users/1033812114843897966",
+    "id": "terrakota",
+    "tags": [
+      "Artista PixelArt",
+      "Render Artist",
+      "Modelador Blockbench"
+    ]
+  },
+  {
+    "name": "⤷ ⋆.˚ Luzz 🤍!! ˎˊ˗",
+    "role": "",
+    "discordAvatar": "/team/luu0ndisc.png",
+    "profileUrl": "https://discord.com/users/1045746074859602138",
+    "id": "luu0ndisc",
+    "tags": [
+      "LoreMaker",
+      "Artista PixelArt",
+      "DC Builder",
+      "Builder",
+      "Editor de video"
+    ]
+  },
+  {
+    "name": "𝒮𝒽𝒶𝒹𝓎𝟤𝟢𝟣𝒴𝒯 🛡",
+    "role": "",
+    "discordAvatar": "/team/shady201yt.png",
+    "profileUrl": "https://discord.com/users/929383386924081213",
+    "id": "shady201yt",
+    "tags": [
+      "Render Artist",
+      "Animador",
+      "Mod developer",
+      "Modelador Blockbench",
+      "Builder",
+      "Artista 3D",
+      "Editor de imagenes"
+    ]
+  }
+]

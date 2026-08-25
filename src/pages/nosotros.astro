@@ -5,13 +5,13 @@ import team from '../data/team.json';
 
 // Schema esperado por cada entrada de team.json:
 // {
+//   "id": "slug",                          // usado en la ruta /nosotros/[id]
 //   "name": "Nombre visible",
 //   "role": "Rol o descripción corta",
 //   "discordAvatar": "/team/archivo.png",  // colocar el archivo en public/team/
-//   "minecraftNick": "nick"                // usado para renderizar la cabeza via mc-heads.net
+//   "profileUrl": "https://discord.com/users/id",
+//   "tags": ["Builder", "Configurador"]     // etiquetas de rol/skill
 // }
-
-const minecraftHead = (nick: string) => `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/80`;
 ---
 
 <Layout title="Nosotros — Plasma Studios" description="El equipo detrás de Plasma Studios.">
@@ -26,33 +26,52 @@ const minecraftHead = (nick: string) => `https://mc-heads.net/avatar/${encodeURI
     {team.length === 0 ? (
       <p class="mt-16 text-sm text-muted">Equipo en construcción.</p>
     ) : (
-      <div class="mt-16 grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {team.map((member: { name: string; role: string; discordAvatar: string; minecraftNick: string }) => (
-          <div class="flex flex-col items-center gap-3 rounded-md border border-border p-6 text-center">
-            <div class="relative">
-              <img
-                src={member.discordAvatar}
-                alt={member.name}
-                width="96"
-                height="96"
-                class="h-24 w-24 rounded-full border border-border object-cover"
-              />
-              <img
-                src={minecraftHead(member.minecraftNick)}
-                alt=""
-                aria-hidden="true"
-                width="32"
-                height="32"
-                class="absolute -bottom-1 -right-1 h-8 w-8 rounded-md border-2 border-background"
-              />
-            </div>
+      <div class="mt-16 grid w-full max-w-6xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+        {team.map((member: { id: string; name: string; role: string; discordAvatar: string }, i: number) => (
+          <a
+            href={`/nosotros/${member.id}`}
+            class="team-card group flex flex-col items-center gap-3 rounded-lg p-4 text-center transition-colors duration-200 hover:bg-border/20 sm:p-6"
+            style={`animation-delay: ${Math.min(i * 40, 400)}ms`}
+          >
+            <img
+              src={member.discordAvatar}
+              alt={member.name}
+              width="96"
+              height="96"
+              class="h-20 w-20 rounded-full border border-border object-cover transition-all duration-200 group-hover:border-accent group-hover:shadow-[0_0_0_4px] group-hover:shadow-accent/10 sm:h-24 sm:w-24"
+            />
             <div>
-              <p class="text-base font-semibold text-foreground">{member.name}</p>
-              <p class="text-sm text-muted">{member.role}</p>
+              <p class="text-sm font-semibold text-foreground sm:text-base">{member.name}</p>
+              {member.role && <p class="text-xs text-muted sm:text-sm">{member.role}</p>}
             </div>
-          </div>
+          </a>
         ))}
       </div>
     )}
   </main>
+
+  <style>
+    .team-card {
+      opacity: 0;
+      animation: team-card-in 0.5s ease-out forwards;
+    }
+
+    @keyframes team-card-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .team-card {
+        opacity: 1;
+        animation: none;
+      }
+    }
+  </style>
 </Layout>
