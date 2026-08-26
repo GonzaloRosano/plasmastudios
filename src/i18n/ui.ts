@@ -26,6 +26,11 @@ export const ui = {
       description: 'El equipo detrás de Plasma Studios.',
       subtitle: 'Las personas que forman Plasma Studios.',
       empty: 'Equipo en construcción.',
+      filterAll: 'Todos',
+      noResults: 'Nadie coincide con la búsqueda.',
+      searchPlaceholder: 'Buscar por nombre…',
+      filterByRole: 'Filtrar por rol',
+      clearFilters: 'Limpiar',
     },
     trabajo: {
       title: 'Trabajo',
@@ -66,6 +71,11 @@ export const ui = {
       description: 'The team behind Plasma Studios.',
       subtitle: 'The people who make up Plasma Studios.',
       empty: 'Team page under construction.',
+      filterAll: 'All',
+      noResults: 'Nobody matches your search.',
+      searchPlaceholder: 'Search by name…',
+      filterByRole: 'Filter by role',
+      clearFilters: 'Clear',
     },
     trabajo: {
       title: 'Work',

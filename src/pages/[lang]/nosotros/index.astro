@@ -2,7 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import team from '../../../data/team.json';
-import { LOCALES, t, localePath, type Locale } from '../../../i18n/ui';
+import { LOCALES, t, localePath, tagLabel, type Locale } from '../../../i18n/ui';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -10,6 +10,13 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Locale };
 const strings = t(lang);
+
+type Member = { id: string; name: string; role: string; discordAvatar: string; ceo?: boolean; tags?: string[] };
+const members = team as Member[];
+
+const allTags = [...new Set(members.flatMap((m) => m.tags ?? []))].sort((a, b) =>
+  tagLabel(lang, a).localeCompare(tagLabel(lang, b))
+);
 ---
 
 <Layout title={`${strings.nosotros.title} — Plasma Studios`} description={strings.nosotros.description} lang={lang}>
@@ -21,44 +28,111 @@ const strings = t(lang);
       <p class="vt-text mt-4 text-lg text-muted">{strings.nosotros.subtitle}</p>
     </div>
 
-    {team.length === 0 ? (
+    {members.length === 0 ? (
       <p class="vt-text mt-16 text-sm text-muted">{strings.nosotros.empty}</p>
     ) : (
-      <div class="mt-16 grid w-full max-w-6xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
-        {team.map((member: { id: string; name: string; role: string; discordAvatar: string; ceo?: boolean }, i: number) => (
-          <a
-            href={localePath(lang, `nosotros/${member.id}`)}
-            class="team-card group flex flex-col items-center gap-3 rounded-lg p-4 text-center transition-colors duration-200 hover:bg-border/20 sm:p-6"
-            style={`animation-delay: ${Math.min(i * 40, 400)}ms`}
-          >
-            <div class="relative">
-              <img
-                src={member.discordAvatar}
-                alt={member.name}
-                width="96"
-                height="96"
-                class="h-20 w-20 rounded-full border border-border object-cover transition-all duration-200 group-hover:border-accent group-hover:shadow-[0_0_0_4px] group-hover:shadow-accent/10 sm:h-24 sm:w-24"
-              />
-              {member.ceo && (
-                <span class="vt-text absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-background bg-accent px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white">
-                  CEO
-                </span>
-              )}
-            </div>
-            <div>
-              <p class="vt-text text-sm font-semibold text-foreground sm:text-base">{member.name}</p>
-              {member.role && <p class="vt-text text-xs text-muted sm:text-sm">{member.role}</p>}
-            </div>
-          </a>
-        ))}
-      </div>
+      <>
+        <div class="vt-text relative z-20 mt-10 flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+          <input
+            type="search"
+            id="team-search"
+            placeholder={strings.nosotros.searchPlaceholder}
+            class="w-full rounded-full border border-border bg-transparent px-4 py-2 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none sm:w-64"
+          />
+
+          {allTags.length > 0 && (
+            <details id="tag-dropdown" class="relative w-full sm:w-auto">
+              <summary
+                id="tag-dropdown-trigger"
+                class="flex list-none items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent [&::-webkit-details-marker]:hidden"
+              >
+                {strings.nosotros.filterByRole}
+                <span id="tag-count" class="hidden rounded-full bg-accent px-1.5 py-0.5 text-[10px] font-semibold text-white"></span>
+                <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </summary>
+
+              <div class="absolute left-1/2 z-20 mt-2 w-64 -translate-x-1/2 rounded-xl border border-border bg-background p-3 shadow-lg sm:left-auto sm:right-0 sm:translate-x-0">
+                <div class="flex items-center justify-between px-1 pb-2">
+                  <span class="text-xs font-semibold text-muted uppercase tracking-wide">{strings.nosotros.filterByRole}</span>
+                  <button type="button" id="tag-clear" class="text-xs font-medium text-accent hover:underline">{strings.nosotros.clearFilters}</button>
+                </div>
+                <div class="tag-list flex max-h-64 flex-col gap-1 overflow-y-auto overscroll-contain" data-lenis-prevent>
+                  {allTags.map((tag) => (
+                    <label class="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm text-foreground hover:bg-border/40">
+                      <input type="checkbox" class="tag-checkbox h-4 w-4 accent-accent" value={tag} />
+                      {tagLabel(lang, tag)}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </details>
+          )}
+        </div>
+
+        <p id="no-results" class="vt-text mt-16 hidden text-sm text-muted">{strings.nosotros.noResults}</p>
+
+        <div id="team-grid" class="mt-10 grid w-full max-w-6xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+          {members.map((member, i) => (
+            <a
+              href={localePath(lang, `nosotros/${member.id}`)}
+              class="team-card group flex flex-col items-center gap-3 rounded-lg p-4 text-center transition-colors duration-200 hover:bg-border/20 sm:p-6"
+              style={`animation-delay: ${Math.min(i * 20, 200)}ms`}
+              data-tags={(member.tags ?? []).join('|')}
+              data-name={member.name.toLowerCase()}
+            >
+              <div class="relative">
+                <img
+                  src={member.discordAvatar}
+                  alt={member.name}
+                  width="96"
+                  height="96"
+                  class="h-20 w-20 rounded-full border border-border object-cover transition-all duration-200 group-hover:border-accent group-hover:shadow-[0_0_0_4px] group-hover:shadow-accent/10 sm:h-24 sm:w-24"
+                />
+                {member.ceo && (
+                  <span class="vt-text absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-background bg-accent px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white">
+                    CEO
+                  </span>
+                )}
+              </div>
+              <div>
+                <p class="vt-text text-sm font-semibold text-foreground sm:text-base">{member.name}</p>
+                {member.role && <p class="vt-text text-xs text-muted sm:text-sm">{member.role}</p>}
+              </div>
+            </a>
+          ))}
+        </div>
+      </>
     )}
   </main>
 
   <style>
+    .tag-list {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .tag-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .tag-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .tag-list::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: 999px;
+    }
+
+    .tag-list::-webkit-scrollbar-thumb:hover {
+      background-color: var(--muted);
+    }
+
     @media (prefers-reduced-motion: no-preference) {
       .team-card {
-        animation: team-card-in 0.4s ease-out both;
+        animation: team-card-in 0.25s ease-out both;
       }
     }
 
@@ -72,5 +146,90 @@ const strings = t(lang);
         transform: translateY(0);
       }
     }
+
   </style>
+
+  <script>
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('.tag-checkbox');
+    const cards = document.querySelectorAll<HTMLAnchorElement>('#team-grid > [data-tags]');
+    const noResults = document.getElementById('no-results');
+    const searchInput = document.getElementById('team-search') as HTMLInputElement | null;
+    const dropdown = document.getElementById('tag-dropdown') as HTMLDetailsElement | null;
+    const tagCount = document.getElementById('tag-count');
+    const clearBtn = document.getElementById('tag-clear');
+
+    const STORAGE_TAGS = 'nosotros-filter-tags';
+    const STORAGE_QUERY = 'nosotros-filter-query';
+
+    function selectedTags() {
+      return Array.from(checkboxes)
+        .filter((c) => c.checked)
+        .map((c) => c.value);
+    }
+
+    function setSelectedTags(tags: string[]) {
+      checkboxes.forEach((c) => (c.checked = tags.includes(c.value)));
+    }
+
+    function updateCount() {
+      const n = selectedTags().length;
+      if (tagCount) {
+        tagCount.textContent = String(n);
+        tagCount.classList.toggle('hidden', n === 0);
+      }
+    }
+
+    function applyFilters() {
+      const tags = selectedTags();
+      const query = (searchInput?.value ?? '').trim().toLowerCase();
+
+      sessionStorage.setItem(STORAGE_TAGS, tags.join('|'));
+      sessionStorage.setItem(STORAGE_QUERY, query);
+      updateCount();
+
+      let visible = 0;
+      cards.forEach((card) => {
+        const cardTags = (card.dataset.tags ?? '').split('|').filter(Boolean);
+        const matchesTags = tags.length === 0 || tags.some((tag) => cardTags.includes(tag));
+        const matchesName = query === '' || (card.dataset.name ?? '').includes(query);
+        const match = matchesTags && matchesName;
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      noResults?.classList.toggle('hidden', visible > 0);
+    }
+
+    checkboxes.forEach((checkbox) => checkbox.addEventListener('change', applyFilters));
+    searchInput?.addEventListener('input', applyFilters);
+
+    clearBtn?.addEventListener('click', () => {
+      setSelectedTags([]);
+      applyFilters();
+      if (dropdown) dropdown.open = false;
+    });
+
+    document.addEventListener('click', (e) => {
+      if (dropdown?.open && !dropdown.contains(e.target as Node)) dropdown.open = false;
+    });
+
+    // Solo restauramos el filtro cuando se vuelve con atrás/adelante (bfcache
+    // o navegación back_forward), nunca en una recarga normal (F5) ni en una
+    // llegada nueva a la página.
+    const navType = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    const isBackForward = navType?.type === 'back_forward';
+
+    if (isBackForward) {
+      const storedTags = sessionStorage.getItem(STORAGE_TAGS)?.split('|').filter(Boolean) ?? [];
+      const storedQuery = sessionStorage.getItem(STORAGE_QUERY);
+      if (storedTags.length > 0 || storedQuery) {
+        setSelectedTags(storedTags);
+        if (searchInput && storedQuery) searchInput.value = storedQuery;
+        applyFilters();
+      }
+    } else {
+      sessionStorage.removeItem(STORAGE_TAGS);
+      sessionStorage.removeItem(STORAGE_QUERY);
+    }
+  </script>
 </Layout>
