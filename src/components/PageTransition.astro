@@ -9,17 +9,40 @@
   const STAGGER = 0.04;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const targets = document.querySelectorAll(TARGET_SELECTOR);
 
-  if (reduceMotion || targets.length === 0) {
-    gsap.set(targets, { opacity: 1, filter: 'blur(0px)' });
-  } else {
+  function queryTargets() {
+    return document.querySelectorAll(TARGET_SELECTOR);
+  }
+
+  function showTargets() {
+    const els = queryTargets();
+    gsap.killTweensOf(els);
+    gsap.set(els, { opacity: 1, filter: 'blur(0px)' });
+  }
+
+  function playIn() {
+    const els = queryTargets();
+    if (reduceMotion || els.length === 0) {
+      showTargets();
+      return;
+    }
     gsap.fromTo(
-      targets,
+      els,
       { opacity: 0, filter: 'blur(8px)' },
       { opacity: 1, filter: 'blur(0px)', duration: DURATION, stagger: STAGGER, ease: 'power2.out' }
     );
   }
+
+  playIn();
+
+  // El fade-out deja opacity: 0. Al volver con atrás/adelante el bfcache
+  // restaura esa página sin reejecutar el script, así que el texto no aparece.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) showTargets();
+  });
+  window.addEventListener('pagehide', (event) => {
+    if (event.persisted) showTargets();
+  });
 
   if (!reduceMotion) {
     document.addEventListener('click', (e) => {
@@ -41,7 +64,7 @@
       if (url.pathname === window.location.pathname && url.hash) return;
 
       e.preventDefault();
-      const out = document.querySelectorAll(TARGET_SELECTOR);
+      const out = queryTargets();
       if (out.length === 0) {
         window.location.href = link.href;
         return;
