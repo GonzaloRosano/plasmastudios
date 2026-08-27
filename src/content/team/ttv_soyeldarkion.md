@@ -4,6 +4,8 @@
 
 **FL Studio composer and audio editor**
 
+<img src="/team/darkion-oc.webp" alt="Darkion's OC" width="220" />
+
 </div>
 
 ---

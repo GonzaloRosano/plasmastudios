@@ -32,6 +32,14 @@ I specialize in character design and value open communication with everyone. My 
 
 ---
 
+## My ribbons
+
+<img src="https://f2.toyhou.se/file/f2-toyhou-se/thumbnails/78535760_FSP.png" alt="Best of both worlds: does both traditional and digital art" title="Best of both worlds: does both traditional and digital art" width="90" />
+<img src="https://f2.toyhou.se/file/f2-toyhou-se/images/106987939_Z4XhTCrgopnz4qN.png" alt="Artists against generative AI" title="Artists against generative AI" width="90" />
+<img src="https://f2.toyhou.se/file/f2-toyhou-se/thumbnails/73743992_UN2.png" alt="Character Library: has 100+ characters" title="Character Library: has 100+ characters" width="90" />
+
+---
+
 ## Contact
 
 - 📧 soysonatademedianoche@gmail.com
