@@ -2,7 +2,7 @@
 
 # Hola, soy Sonata 🦋
 
-**Artista — LoreMaker, Render Artist & Pixel Art**
+**Diseño de Personajes, Concept Art, Building, Logotipos y Lore**
 
 </div>
 
@@ -10,29 +10,30 @@
 
 ## Sobre mí
 
-¡Hola! Tengo 18 años, soy artista y amo las polillas. Espero que la pases bien en mi perfil.
+¡Hola! Soy Sonata, una artista de 18 años con 5 años de experiencia en la realización de comisiones y diseño de personajes. A lo largo de este tiempo perfeccioné mis habilidades de manera autodidacta, estudiando a fondo arte, composición y anatomía. Actualmente curso un Bachillerato en Artes.
+
+Me especializo en diseño de personajes y valoro enormemente la comunicación abierta con todos. Mi objetivo es generar un ambiente de trabajo colaborativo, familiar y amigable para cada proyecto.
 
 ---
 
 ## Qué hago
 
-- Lore y worldbuilding (**LoreMaker**)
-- Renders y arte digital (**Render Artist**)
-- Pixel art
-- Construcción (**Builder**)
-- Edición de imágenes
+- Diseño de personaje
+- Concept art
+- Building
+- Diseño de logotipo
+- Loremaking
 
 ---
 
-## Ahora mismo
+## Programas que utilizo
 
-- 🎮 Jugando *Honkai: Star Rail*
-- 📖 Leyendo *Witch Hat Atelier*
-- 🎨 Dibujando algunos redesigns
-- 🎵 Escuchando *Morality Lesson* de Will Stetson
+- Blockbench
 
 ---
 
 ## Contacto
 
+- 📧 soysonatademedianoche@gmail.com
 - 💬 Discord: Soy_Sonata
+- 🐦 [x.com/Soy_Sonata](https://x.com/Soy_Sonata)
