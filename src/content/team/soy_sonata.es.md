@@ -29,6 +29,7 @@ Me especializo en diseño de personajes y valoro enormemente la comunicación ab
 ## Programas que utilizo
 
 - Blockbench
+- Clip Studio Paint
 
 ---
 

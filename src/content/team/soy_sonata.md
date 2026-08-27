@@ -29,6 +29,7 @@ I specialize in character design and value open communication with everyone. My 
 ## Software I use
 
 - Blockbench
+- Clip Studio Paint
 
 ---
 
