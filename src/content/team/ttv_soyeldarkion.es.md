@@ -4,8 +4,6 @@
 
 **Compositor de FL Studio y editor de audio**
 
-<img src="/team/darkion-oc.webp" alt="OC de Darkion" width="220" />
-
 </div>
 
 ---
