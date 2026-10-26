@@ -80,8 +80,6 @@ La página del equipo lee `src/data/team.json` (22 integrantes por ahora). Ejemp
 
 El sitio está publicado en [plasmastudios.vercel.app](https://plasmastudios.vercel.app).
 
-Pendiente conocido: `site` en `astro.config.mjs` y la línea `Sitemap` de `public/robots.txt` todavía apuntan a `http://169.58.226.205` (el VPS anterior). Hay que cambiar ambos por el dominio real y volver a compilar para que el sitemap y `robots.txt` usen la URL correcta.
-
 `scripts/deploy.sh` es el script original de despliegue al VPS: compila el sitio y sube `dist/` a `/var/www/plasmastudios` por SSH usando el alias `plasma-vps` de `~/.ssh/config`. No guarda credenciales.
 
 ## Licencia

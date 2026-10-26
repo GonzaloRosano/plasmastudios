@@ -80,8 +80,6 @@ The team page reads `src/data/team.json` (22 members at the moment). Example ent
 
 The site is published at [plasmastudios.vercel.app](https://plasmastudios.vercel.app).
 
-Known pending item: `site` in `astro.config.mjs` and the `Sitemap` line in `public/robots.txt` still point to `http://169.58.226.205` (the old VPS). Update both to the real domain and rebuild so the sitemap and `robots.txt` use the correct URL.
-
 `scripts/deploy.sh` is the original VPS deploy script: it builds the site and uploads `dist/` to `/var/www/plasmastudios` over SSH using the `plasma-vps` alias from `~/.ssh/config`. It stores no credentials.
 
 ## License
